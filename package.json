@@ -16,10 +16,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.71.7",
-    "react-native-web": "~0.18.10"
+    "react-native-web": "~0.18.10",
+    "expo-dev-client": "~2.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
   },
-  "private": true
+  "private": false
 }
