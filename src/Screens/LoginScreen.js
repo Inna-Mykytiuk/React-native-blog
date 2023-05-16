@@ -107,8 +107,8 @@ const Login = () => {
             style={{
               ...styles.input,
               marginBottom: 10,
-              borderColor: isFocus.password ? "#FF6C00" : "#E8E8E8",
-              backgroundColor: isFocus.password ? "#FFFFFF" : "#F6F6F6",
+              borderColor: isFocus.email ? "#FF6C00" : "#E8E8E8",
+              backgroundColor: isFocus.email ? "#FFFFFF" : "#F6F6F6",
             }}
             placeholder='Enter email'
             textContentType='emailAddress'
