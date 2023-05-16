@@ -6,22 +6,14 @@ import {
   Text,
   View,
   ImageBackground,
-  // Button,
   TextInput,
-  // Image,
-  SafeAreaView,
+  Image,
   TouchableOpacity,
   StatusBar,
   Alert,
+  // SafeAreaView,
 } from "react-native";
 import { Container } from "../../Components/Container";
-
-// const LoginBg = required("../../assets/mainBG.png");
-
-// const initialStateFocus = {
-//   email: false,
-//   password: false,
-// };
 
 const initialStateUser = {
   email: "",
@@ -30,9 +22,6 @@ const initialStateUser = {
 };
 
 const Login = () => {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [username, setUsername] = useState("");
   const [user, setUser] = useState(initialStateUser);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -66,14 +55,13 @@ const Login = () => {
   // const handlerSubmit = () => {
   //   // setIsShowKeyboard(false);
   //   // setUser(initialStateUser);
-  //   if (user.username !== "" && user.email !== "" && user.password !== "") {
-  //     console.log(email, password);
-  //   }
   // };
 
   const handlerSubmit = () => {
+    setIsShowKeyboard(false);
     if (user.username !== "" && user.email !== "" && user.password !== "") {
       console.log(user.username, user.email, user.password);
+      setUser(initialStateUser);
     }
   };
 
@@ -90,6 +78,13 @@ const Login = () => {
             source={require("../../assets/profilePhoto.png")}
             style={styles.backImagePhoto}
           /> */}
+          <View style={styles.backImagePhoto} />
+          <TouchableOpacity>
+            <Image
+              source={require("../../assets/image/ellipse1.png")}
+              style={styles.addBtnProfPicture}
+            />
+          </TouchableOpacity>
           <Text style={styles.title}>Sign in</Text>
           <TextInput
             style={{
@@ -107,11 +102,14 @@ const Login = () => {
               setUser((prevState) => ({ ...prevState, username: value }))
             }
             onEndEditing={() => handlerEndEditing("username")}
-            autoCapitalize='none'
-            keyboardType='default'
           />
           <TextInput
-            style={styles.input}
+            style={{
+              ...styles.input,
+              marginBottom: 10,
+              borderColor: isFocus.password ? "#FF6C00" : "#E8E8E8",
+              backgroundColor: isFocus.password ? "#FFFFFF" : "#F6F6F6",
+            }}
             placeholder='Enter email'
             textContentType='emailAddress'
             value={user.email}
@@ -120,8 +118,6 @@ const Login = () => {
               setUser((prevState) => ({ ...prevState, email: value }))
             }
             onEndEditing={() => handlerEndEditing("email")}
-            autoCapitalize='none'
-            keyboardType='email-address'
           />
           <View style={{ ...styles.wrapperInput, marginBottom: 43 }}>
             <TextInput
@@ -164,7 +160,7 @@ const Login = () => {
             <Text
               style={{
                 color: "#1B4371",
-                fontWeight: "500",
+                fontWeight: "400",
                 fontSize: 16,
               }}
             >
@@ -177,7 +173,7 @@ const Login = () => {
               <Text
                 style={{
                   color: "#FF6C00",
-                  fontWeight: "500",
+                  fontWeight: "400",
                   fontSize: 14,
                 }}
               >
@@ -209,12 +205,16 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   input: {
-    backgroundColor: "#F6F7FB",
-    height: 58,
-    marginBottom: 20,
+    height: 50,
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderStyle: "solid",
+    color: "#212121",
+    fontFamily: fonts.roboto400,
     fontSize: 16,
-    borderRadius: 10,
-    padding: 12,
+    lineHeight: 18.75,
   },
   backImage: {
     flex: 1,
@@ -222,16 +222,16 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   backImagePhoto: {
+    position: "absolute",
+    top: -50,
     width: 120,
     height: 120,
     borderRadius: 25,
     alignSelf: "center",
     marginBottom: 32,
+    backgroundColor: "#F6F6F6",
   },
   form: {
-    // flex: 1,
-    // justifyContent: "center",
-    // marginHorizontal: 30,
     position: "relative",
     backgroundColor: "#FFFFFF",
     borderTopLeftRadius: 25,
@@ -245,6 +245,15 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
+  },
+  addBtnProfPicture: {
+    position: "absolute",
+    top: 30,
+
+    right: 109,
+    width: 25,
+    height: 25,
+    alignSelf: "center",
   },
   wrapperInput: { position: "relative" },
   buttonShowPassword: {
