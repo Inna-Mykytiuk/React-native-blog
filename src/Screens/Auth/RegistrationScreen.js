@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { fonts } from "../../assets/fonts/fonts";
-import { AddAvatarIcon, RemoveAvatarIcon } from "../../Components/Icons";
-import { AddAvatarButton, MainButton } from "../../Components/Buttons";
+import { fonts } from "../../../assets/fonts/fonts";
+import { AddAvatarIcon, RemoveAvatarIcon } from "../../../Components/Icons";
+import { AddAvatarButton, MainButton } from "../../../Components/Buttons";
 
 import {
   StyleSheet,
@@ -15,7 +15,7 @@ import {
   // Alert,
   // SafeAreaView,
 } from "react-native";
-import { Container } from "../../Components/Container";
+import { Container } from "../../../Components/Container";
 
 const initialStateUser = {
   email: "",
@@ -32,7 +32,7 @@ const RegistrationScreen = ({ navigation }) => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   const handlerAddAvatar = () => {
-    setUserPhoto("../../assets/image/avatar.png");
+    setUserPhoto("../../../assets/image/avatar.png");
   };
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const RegistrationScreen = ({ navigation }) => {
   return (
     <Container>
       <ImageBackground
-        source={require("../../assets/image/photo_bg.png")}
+        source={require("../../../assets/image/photo_bg.png")}
         style={styles.backImage}
       >
         <View
@@ -115,7 +115,7 @@ const RegistrationScreen = ({ navigation }) => {
                 transform: [{ translateX: 50 }],
               }}
             >
-              <Image source={require("../../assets/image/avatar.png")} />
+              <Image source={require("../../../assets/image/photo_bg.png")} />
               <AddAvatarButton onPress={() => setUserPhoto("")}>
                 <RemoveAvatarIcon />
               </AddAvatarButton>
@@ -180,45 +180,13 @@ const RegistrationScreen = ({ navigation }) => {
               {show ? "Hide" : "Show"}
             </Text>
           </View>
-          <TouchableOpacity style={styles.button} onPress={handlerSubmit}>
-            <Text style={{ fontWeight: "normal", color: "#fff", fontSize: 16 }}>
-              {" "}
-              Sign in
-            </Text>
-          </TouchableOpacity>
-          <View
-            style={{
-              marginTop: 20,
-              flexDirection: "row",
-              alignItems: "center",
-              alignSelf: "center",
-            }}
+          <MainButton onPress={handlerSubmit} text={"Sign up"} />
+          <Text
+            style={styles.link}
+            onPress={() => navigation.navigate("Login")}
           >
-            <Text
-              style={{
-                color: "#1B4371",
-                fontWeight: "400",
-                fontSize: 16,
-              }}
-            >
-              Already have an account?{" "}
-            </Text>
-            <TouchableOpacity
-              style={{ margin: 0 }}
-              onPress={() => navigation.navigate("Registration screen")}
-            >
-              <Text
-                style={{
-                  color: "#FF6C00",
-                  fontWeight: "400",
-                  fontSize: 14,
-                }}
-              >
-                {" "}
-                Sign in
-              </Text>
-            </TouchableOpacity>
-          </View>
+            Already have an account? Sign in
+          </Text>
         </View>
         <StatusBar barStyle='light-content' />
       </ImageBackground>
@@ -252,6 +220,14 @@ const styles = StyleSheet.create({
     fontFamily: fonts.roboto400,
     fontSize: 16,
     lineHeight: 18.75,
+  },
+  link: {
+    color: "#1B4371",
+    fontFamily: fonts.roboto400,
+    fontSize: 16,
+    lineHeight: 18.75,
+    textAlign: "center",
+    alignItems: "flex-end",
   },
   backImage: {
     flex: 1,
