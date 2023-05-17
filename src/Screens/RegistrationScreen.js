@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { fonts } from "../../assets/fonts/fonts";
+import { AddAvatarIcon, RemoveAvatarIcon } from "../../Components/Icons";
+import { AddAvatarButton, MainButton } from "../../Components/Buttons";
 
 import {
   StyleSheet,
@@ -18,14 +20,24 @@ import { Container } from "../../Components/Container";
 const initialStateUser = {
   email: "",
   password: "",
-  username: "",
+  login: "",
+  avatar: "",
 };
 
-const Registration = ({ navigation }) => {
-  const [user, setUser] = useState(initialStateUser);
-  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
+const RegistrationScreen = ({ navigation }) => {
   const [show, setShow] = useState(false);
+  const [user, setUser] = useState(initialStateUser);
+  const [userPhoto, setUserPhoto] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+
+  const handlerAddAvatar = () => {
+    setUserPhoto("../../assets/image/avatar.png");
+  };
+
+  useEffect(() => {
+    setUser((prevState) => ({ ...prevState, avatar: userPhoto }));
+  }, [userPhoto]);
 
   const handlerFocus = (input) => {
     setIsShowKeyboard(true);
@@ -59,8 +71,8 @@ const Registration = ({ navigation }) => {
 
   const handlerSubmit = () => {
     setIsShowKeyboard(false);
-    if (user.username !== "" && user.email !== "" && user.password !== "") {
-      console.log(user.username, user.email, user.password);
+    if (user.login !== "" && user.email !== "" && user.password !== "") {
+      console.log(user.login, user.email, user.password);
       setUser(initialStateUser);
       // navigation.navigate("Home", {
       //   screen: "Posts",
@@ -82,30 +94,50 @@ const Registration = ({ navigation }) => {
             source={require("../../assets/profilePhoto.png")}
             style={styles.backImagePhoto}
           /> */}
-          <View style={styles.backImagePhoto} />
-          <TouchableOpacity>
-            <Image
-              source={require("../../assets/image/ellipse1.png")}
-              style={styles.addBtnProfPicture}
-            />
-          </TouchableOpacity>
-          <Text style={styles.title}>Sign in</Text>
+          {/* <View style={styles.backImagePhoto} /> */}
+
+          {!userPhoto ? (
+            <View
+              style={{
+                ...styles.boxAvatar,
+                backgroundColor: "#F6F6F6",
+                transform: [{ translateX: 50 }],
+              }}
+            >
+              <AddAvatarButton onPress={handlerAddAvatar}>
+                <AddAvatarIcon />
+              </AddAvatarButton>
+            </View>
+          ) : (
+            <View
+              style={{
+                ...styles.boxAvatar,
+                transform: [{ translateX: 50 }],
+              }}
+            >
+              <Image source={require("../../assets/image/avatar.png")} />
+              <AddAvatarButton onPress={() => setUserPhoto("")}>
+                <RemoveAvatarIcon />
+              </AddAvatarButton>
+            </View>
+          )}
+          <Text style={styles.title}>Registration</Text>
           <TextInput
             style={{
               ...styles.input,
               marginBottom: 10,
-              borderColor: isFocus.username ? "#FF6C00" : "#E8E8E8",
-              backgroundColor: isFocus.username ? "#FFFFFF" : "#F6F6F6",
+              borderColor: isFocus.login ? "#FF6C00" : "#E8E8E8",
+              backgroundColor: isFocus.login ? "#FFFFFF" : "#F6F6F6",
             }}
-            placeholder='Enter username'
+            placeholder='Login'
             placeholderTextColor='#BDBDBD'
-            textContentType='username'
-            value={user.username}
-            onFocus={() => handlerFocus("username")}
+            textContentType='login'
+            value={user.login}
+            onFocus={() => handlerFocus("login")}
             onChangeText={(value) =>
-              setUser((prevState) => ({ ...prevState, username: value }))
+              setUser((prevState) => ({ ...prevState, login: value }))
             }
-            onEndEditing={() => handlerEndEditing("username")}
+            onEndEditing={() => handlerEndEditing("login")}
           />
           <TextInput
             style={{
@@ -114,8 +146,9 @@ const Registration = ({ navigation }) => {
               borderColor: isFocus.email ? "#FF6C00" : "#E8E8E8",
               backgroundColor: isFocus.email ? "#FFFFFF" : "#F6F6F6",
             }}
-            placeholder='Enter email'
-            textContentType='emailAddress'
+            placeholder='E-mail'
+            placeholderTextColor='#BDBDBD'
+            textContentType='email'
             value={user.email}
             onFocus={() => handlerFocus("email")}
             onChangeText={(value) =>
@@ -168,7 +201,7 @@ const Registration = ({ navigation }) => {
                 fontSize: 16,
               }}
             >
-              Don't have an account?{" "}
+              Already have an account?{" "}
             </Text>
             <TouchableOpacity
               style={{ margin: 0 }}
@@ -182,7 +215,7 @@ const Registration = ({ navigation }) => {
                 }}
               >
                 {" "}
-                Sign Up
+                Sign in
               </Text>
             </TouchableOpacity>
           </View>
@@ -193,7 +226,7 @@ const Registration = ({ navigation }) => {
   );
 };
 
-export default Registration;
+export default RegistrationScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -275,5 +308,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     lineHeight: 18.75,
     color: "#1B4371",
+  },
+  boxAvatar: {
+    position: "absolute",
+    width: 120,
+    height: 120,
+    top: -60,
+    right: "50%",
+    borderRadius: 16,
+    backgroundColor: "#F6F6F6",
   },
 });

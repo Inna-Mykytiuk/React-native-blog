@@ -20,7 +20,7 @@ const initialStateUser = {
   password: "",
 };
 
-const Login = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
   const [user, setUser] = useState(initialStateUser);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -58,8 +58,8 @@ const Login = ({ navigation }) => {
 
   const handlerSubmit = () => {
     setIsShowKeyboard(false);
-    if (user.username !== "" && user.email !== "" && user.password !== "") {
-      console.log(user.username, user.email, user.password);
+    if (user.email !== "" && user.password !== "") {
+      console.log(user.email, user.password);
       setUser(initialStateUser);
       // navigation.navigate("Home", {
       //   screen: "Posts",
@@ -86,6 +86,7 @@ const Login = ({ navigation }) => {
               backgroundColor: isFocus.email ? "#FFFFFF" : "#F6F6F6",
             }}
             placeholder='Enter email'
+            placeholderTextColor='#BDBDBD'
             textContentType='emailAddress'
             value={user.email}
             onFocus={() => handlerFocus("email")}
@@ -164,7 +165,7 @@ const Login = ({ navigation }) => {
   );
 };
 
-export default Login;
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
