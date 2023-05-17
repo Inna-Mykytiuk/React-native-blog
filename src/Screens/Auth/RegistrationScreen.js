@@ -98,12 +98,7 @@ const RegistrationScreen = () => {
                 transform: [{ translateX: 50 }],
               }}
             >
-              {/* <Image source={require("../../../assets/image/avatar.png")} /> */}
-              <Image
-                source={
-                  userPhoto || require("../../../assets/image/avatar.png")
-                }
-              />
+              <Image source={require("../../../assets/image/avatar.png")} />
               <AddAvatarButton onPress={() => setUserPhoto("")}>
                 <Ionicons
                   name='close-circle-outline'
