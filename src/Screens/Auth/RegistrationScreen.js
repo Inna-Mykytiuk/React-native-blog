@@ -35,7 +35,7 @@ const RegistrationScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
 
   const handlerAddAvatar = () => {
-    setUserPhoto("../../../assets/image/avatar.png");
+    setUserPhoto(require("../../../assets/image/avatar.png"));
   };
 
   useEffect(() => {
@@ -98,7 +98,12 @@ const RegistrationScreen = () => {
                 transform: [{ translateX: 50 }],
               }}
             >
-              <Image source={require("../../../assets/image/photo_bg.png")} />
+              {/* <Image source={require("../../../assets/image/avatar.png")} /> */}
+              <Image
+                source={
+                  userPhoto || require("../../../assets/image/avatar.png")
+                }
+              />
               <AddAvatarButton onPress={() => setUserPhoto("")}>
                 <Ionicons
                   name='close-circle-outline'
