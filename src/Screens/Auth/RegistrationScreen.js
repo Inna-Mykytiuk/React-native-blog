@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { fonts } from "../../../assets/fonts/fonts";
-import { AddAvatarIcon, RemoveAvatarIcon } from "../../../Components/Icons";
+// import { AddAvatarIcon, RemoveAvatarIcon } from "../../../Components/Icons";
 import { AddAvatarButton, MainButton } from "../../../Components/Buttons";
+import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   StyleSheet,
@@ -10,10 +13,8 @@ import {
   ImageBackground,
   TextInput,
   Image,
-  TouchableOpacity,
   StatusBar,
   // Alert,
-  // SafeAreaView,
 } from "react-native";
 import { Container } from "../../../Components/Container";
 
@@ -24,7 +25,9 @@ const initialStateUser = {
   avatar: "",
 };
 
-const RegistrationScreen = ({ navigation }) => {
+const RegistrationScreen = () => {
+  const navigation = useNavigation();
+
   const [show, setShow] = useState(false);
   const [user, setUser] = useState(initialStateUser);
   const [userPhoto, setUserPhoto] = useState(null);
@@ -55,29 +58,15 @@ const RegistrationScreen = ({ navigation }) => {
     });
   };
 
-  // const handlerSubmit = () => {
-  //   if (email !== "" && password !== "") {
-  //     // signInWithEmailAndPassword(auth, email, password)
-  //     console.log(email, password);
-  //     // .then(() => console.log("Login success"))
-  //     // .catch((err) => Alert.alert("Login error", err.message));
-  //   }
-  // };
-
-  // const handlerSubmit = () => {
-  //   // setIsShowKeyboard(false);
-  //   // setUser(initialStateUser);
-  // };
-
   const handlerSubmit = () => {
     setIsShowKeyboard(false);
     if (user.login !== "" && user.email !== "" && user.password !== "") {
       console.log(user.login, user.email, user.password);
       setUser(initialStateUser);
-      // navigation.navigate("Home", {
-      //   screen: "Posts",
-      //   user,
-      // });
+      navigation.navigate("Home", {
+        screen: "Posts",
+        user,
+      });
     }
   };
 
@@ -90,12 +79,6 @@ const RegistrationScreen = ({ navigation }) => {
         <View
           style={{ ...styles.form, paddingBottom: isShowKeyboard ? 79 : 129 }}
         >
-          {/* <Image
-            source={require("../../assets/profilePhoto.png")}
-            style={styles.backImagePhoto}
-          /> */}
-          {/* <View style={styles.backImagePhoto} /> */}
-
           {!userPhoto ? (
             <View
               style={{
@@ -105,7 +88,7 @@ const RegistrationScreen = ({ navigation }) => {
               }}
             >
               <AddAvatarButton onPress={handlerAddAvatar}>
-                <AddAvatarIcon />
+                <Ionicons name='add-circle-outline' size={30} color='#FF6C00' />
               </AddAvatarButton>
             </View>
           ) : (
@@ -117,7 +100,11 @@ const RegistrationScreen = ({ navigation }) => {
             >
               <Image source={require("../../../assets/image/photo_bg.png")} />
               <AddAvatarButton onPress={() => setUserPhoto("")}>
-                <RemoveAvatarIcon />
+                <Ionicons
+                  name='close-circle-outline'
+                  size={30}
+                  color='#BDBDBD'
+                />
               </AddAvatarButton>
             </View>
           )}
@@ -177,7 +164,11 @@ const RegistrationScreen = ({ navigation }) => {
               style={styles.buttonShowPassword}
               onPress={() => setShow(!show)}
             >
-              {show ? "Hide" : "Show"}
+              {show ? (
+                <Feather name='eye' size={22} color='grey' />
+              ) : (
+                <Feather name='eye-off' size={22} color='#BDBDBD' />
+              )}
             </Text>
           </View>
           <MainButton
@@ -297,5 +288,21 @@ const styles = StyleSheet.create({
     right: "50%",
     borderRadius: 16,
     backgroundColor: "#F6F6F6",
+  },
+  button: {
+    backgroundColor: "#FF6C00",
+    color: "#FFFFFF",
+    height: 51,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "grey",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowRadius: 10,
+    elevation: 5,
   },
 });

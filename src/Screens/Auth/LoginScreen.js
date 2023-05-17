@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { fonts } from "../../../assets/fonts/fonts";
 import { MainButton } from "../../../Components/Buttons";
+import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import {
   StyleSheet,
@@ -19,7 +21,9 @@ const initialStateUser = {
   password: "",
 };
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
+  const navigation = useNavigation();
+
   const [user, setUser] = useState(initialStateUser);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -41,29 +45,15 @@ const LoginScreen = ({ navigation }) => {
     });
   };
 
-  // const handlerSubmit = () => {
-  //   if (email !== "" && password !== "") {
-  //     // signInWithEmailAndPassword(auth, email, password)
-  //     console.log(email, password);
-  //     // .then(() => console.log("Login success"))
-  //     // .catch((err) => Alert.alert("Login error", err.message));
-  //   }
-  // };
-
-  // const handlerSubmit = () => {
-  //   // setIsShowKeyboard(false);
-  //   // setUser(initialStateUser);
-  // };
-
   const handlerSubmit = () => {
     setIsShowKeyboard(false);
     if (user.email !== "" && user.password !== "") {
       console.log(user.email, user.password);
       setUser(initialStateUser);
-      // navigation.navigate("Home", {
-      //   screen: "Posts",
-      //   user,
-      // });
+      navigation.navigate("Home", {
+        screen: "Posts",
+        user,
+      });
     }
   };
 
@@ -115,7 +105,11 @@ const LoginScreen = ({ navigation }) => {
               style={styles.buttonShowPassword}
               onPress={() => setShow(!show)}
             >
-              {show ? "Hide" : "Show"}
+              {show ? (
+                <Feather name='eye' size={22} color='grey' />
+              ) : (
+                <Feather name='eye-off' size={22} color='#BDBDBD' />
+              )}
             </Text>
           </View>
           <MainButton
