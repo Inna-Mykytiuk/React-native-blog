@@ -180,7 +180,11 @@ const RegistrationScreen = ({ navigation }) => {
               {show ? "Hide" : "Show"}
             </Text>
           </View>
-          <MainButton onPress={handlerSubmit} text={"Sign up"} />
+          <MainButton
+            style={styles.button}
+            onPress={handlerSubmit}
+            text={"Sign up"}
+          />
           <Text
             style={styles.link}
             onPress={() => navigation.navigate("Login")}

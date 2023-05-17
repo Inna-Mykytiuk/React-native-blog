@@ -191,12 +191,12 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     shadowColor: "grey",
-    shadowOpacity: 0.05,
+    shadowOpacity: 1,
     shadowOffset: {
       width: 0,
-      height: 0,
+      height: 2,
     },
-    shadowRadius: 8,
+    shadowRadius: 10,
     elevation: 5,
   },
   addBtnProfPicture: {
