@@ -10,7 +10,7 @@ import {
   Image,
   TouchableOpacity,
   StatusBar,
-  Alert,
+  // Alert,
   // SafeAreaView,
 } from "react-native";
 import { Container } from "../../Components/Container";
@@ -18,10 +18,9 @@ import { Container } from "../../Components/Container";
 const initialStateUser = {
   email: "",
   password: "",
-  username: "",
 };
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [user, setUser] = useState(initialStateUser);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
@@ -62,6 +61,10 @@ const Login = () => {
     if (user.username !== "" && user.email !== "" && user.password !== "") {
       console.log(user.username, user.email, user.password);
       setUser(initialStateUser);
+      // navigation.navigate("Home", {
+      //   screen: "Posts",
+      //   user,
+      // });
     }
   };
 
@@ -72,37 +75,9 @@ const Login = () => {
         style={styles.backImage}
       >
         <View
-          style={{ ...styles.form, paddingBottom: isShowKeyboard ? 79 : 129 }}
+          style={{ ...styles.form, paddingBottom: isShowKeyboard ? 79 : 130 }}
         >
-          {/* <Image
-            source={require("../../assets/profilePhoto.png")}
-            style={styles.backImagePhoto}
-          /> */}
-          <View style={styles.backImagePhoto} />
-          <TouchableOpacity>
-            <Image
-              source={require("../../assets/image/ellipse1.png")}
-              style={styles.addBtnProfPicture}
-            />
-          </TouchableOpacity>
           <Text style={styles.title}>Sign in</Text>
-          <TextInput
-            style={{
-              ...styles.input,
-              marginBottom: 10,
-              borderColor: isFocus.username ? "#FF6C00" : "#E8E8E8",
-              backgroundColor: isFocus.username ? "#FFFFFF" : "#F6F6F6",
-            }}
-            placeholder='Enter username'
-            placeholderTextColor='#BDBDBD'
-            textContentType='username'
-            value={user.username}
-            onFocus={() => handlerFocus("username")}
-            onChangeText={(value) =>
-              setUser((prevState) => ({ ...prevState, username: value }))
-            }
-            onEndEditing={() => handlerEndEditing("username")}
-          />
           <TextInput
             style={{
               ...styles.input,
@@ -201,7 +176,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: fonts.roboto700,
     fontSize: 30,
-    marginTop: 92,
+    marginTop: 32,
     marginBottom: 32,
   },
   input: {
@@ -221,16 +196,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
-  backImagePhoto: {
-    position: "absolute",
-    top: -50,
-    width: 120,
-    height: 120,
-    borderRadius: 25,
-    alignSelf: "center",
-    marginBottom: 32,
-    backgroundColor: "#F6F6F6",
-  },
   form: {
     position: "relative",
     backgroundColor: "#FFFFFF",
@@ -245,6 +210,14 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
+    shadowColor: "grey",
+    shadowOpacity: 0.05,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 8,
+    elevation: 5,
   },
   addBtnProfPicture: {
     position: "absolute",

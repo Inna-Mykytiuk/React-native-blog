@@ -1,135 +1,279 @@
 import React, { useState } from "react";
+import { fonts } from "../../assets/fonts/fonts";
+
 import {
   StyleSheet,
   Text,
   View,
-  // Button,
+  ImageBackground,
   TextInput,
   Image,
-  SafeAreaView,
   TouchableOpacity,
   StatusBar,
-  Alert,
+  // Alert,
+  // SafeAreaView,
 } from "react-native";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../config/firebase";
-const backImage = require("../assets/bg.jpg");
+import { Container } from "../../Components/Container";
 
-export default function Signup({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const initialStateUser = {
+  email: "",
+  password: "",
+  username: "",
+};
 
-  const onHandleSignup = () => {
-    if (email !== "" && password !== "") {
-      // createUserWithEmailAndPassword(auth, email, password)
-      console
-        .log(email, password)
-        .then(() => console.log("Signup success"))
-        .catch((err) => Alert.alert("Login error", err.message));
+const Registration = ({ navigation }) => {
+  const [user, setUser] = useState(initialStateUser);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [isFocus, setIsFocus] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handlerFocus = (input) => {
+    setIsShowKeyboard(true);
+    setIsFocus({
+      ...isFocus,
+      [input]: true,
+    });
+  };
+
+  const handlerEndEditing = (input) => {
+    setIsShowKeyboard(false);
+    setIsFocus({
+      ...isFocus,
+      [input]: false,
+    });
+  };
+
+  // const handlerSubmit = () => {
+  //   if (email !== "" && password !== "") {
+  //     // signInWithEmailAndPassword(auth, email, password)
+  //     console.log(email, password);
+  //     // .then(() => console.log("Login success"))
+  //     // .catch((err) => Alert.alert("Login error", err.message));
+  //   }
+  // };
+
+  // const handlerSubmit = () => {
+  //   // setIsShowKeyboard(false);
+  //   // setUser(initialStateUser);
+  // };
+
+  const handlerSubmit = () => {
+    setIsShowKeyboard(false);
+    if (user.username !== "" && user.email !== "" && user.password !== "") {
+      console.log(user.username, user.email, user.password);
+      setUser(initialStateUser);
+      // navigation.navigate("Home", {
+      //   screen: "Posts",
+      //   user,
+      // });
     }
   };
 
   return (
-    <View style={styles.container}>
-      <Image source={backImage} style={styles.backImage} />
-      <View style={styles.whiteSheet} />
-      <SafeAreaView style={styles.form}>
-        <Text style={styles.title}>Sign Up</Text>
-        <TextInput
-          style={styles.input}
-          placeholder='Enter email'
-          autoCapitalize='none'
-          keyboardType='email-address'
-          textContentType='emailAddress'
-          autoFocus={true}
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder='Enter password'
-          autoCapitalize='none'
-          autoCorrect={false}
-          secureTextEntry={true}
-          textContentType='password'
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-        />
-        <TouchableOpacity style={styles.button} onPress={onHandleSignup}>
-          <Text style={{ fontWeight: "bold", color: "#fff", fontSize: 18 }}>
-            {" "}
-            Sign Up
-          </Text>
-        </TouchableOpacity>
+    <Container>
+      <ImageBackground
+        source={require("../../assets/image/photo_bg.png")}
+        style={styles.backImage}
+      >
         <View
-          style={{
-            marginTop: 20,
-            flexDirection: "row",
-            alignItems: "center",
-            alignSelf: "center",
-          }}
+          style={{ ...styles.form, paddingBottom: isShowKeyboard ? 79 : 129 }}
         >
-          <Text style={{ color: "gray", fontWeight: "600", fontSize: 14 }}>
-            Don't have an account?{" "}
-          </Text>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
-            <Text style={{ color: "#609948", fontWeight: "600", fontSize: 14 }}>
+          {/* <Image
+            source={require("../../assets/profilePhoto.png")}
+            style={styles.backImagePhoto}
+          /> */}
+          <View style={styles.backImagePhoto} />
+          <TouchableOpacity>
+            <Image
+              source={require("../../assets/image/ellipse1.png")}
+              style={styles.addBtnProfPicture}
+            />
+          </TouchableOpacity>
+          <Text style={styles.title}>Sign in</Text>
+          <TextInput
+            style={{
+              ...styles.input,
+              marginBottom: 10,
+              borderColor: isFocus.username ? "#FF6C00" : "#E8E8E8",
+              backgroundColor: isFocus.username ? "#FFFFFF" : "#F6F6F6",
+            }}
+            placeholder='Enter username'
+            placeholderTextColor='#BDBDBD'
+            textContentType='username'
+            value={user.username}
+            onFocus={() => handlerFocus("username")}
+            onChangeText={(value) =>
+              setUser((prevState) => ({ ...prevState, username: value }))
+            }
+            onEndEditing={() => handlerEndEditing("username")}
+          />
+          <TextInput
+            style={{
+              ...styles.input,
+              marginBottom: 10,
+              borderColor: isFocus.email ? "#FF6C00" : "#E8E8E8",
+              backgroundColor: isFocus.email ? "#FFFFFF" : "#F6F6F6",
+            }}
+            placeholder='Enter email'
+            textContentType='emailAddress'
+            value={user.email}
+            onFocus={() => handlerFocus("email")}
+            onChangeText={(value) =>
+              setUser((prevState) => ({ ...prevState, email: value }))
+            }
+            onEndEditing={() => handlerEndEditing("email")}
+          />
+          <View style={{ ...styles.wrapperInput, marginBottom: 43 }}>
+            <TextInput
+              value={user.password}
+              onChangeText={(value) =>
+                setUser((prevState) => ({ ...prevState, password: value }))
+              }
+              onFocus={() => handlerFocus("password")}
+              onEndEditing={() => handlerEndEditing("password")}
+              placeholder='Password'
+              placeholderTextColor='#BDBDBD'
+              secureTextEntry={show ? false : true}
+              style={{
+                ...styles.input,
+                borderColor: isFocus.password ? "#FF6C00" : "#E8E8E8",
+                backgroundColor: isFocus.password ? "#FFFFFF" : "#F6F6F6",
+              }}
+            />
+            <Text
+              style={styles.buttonShowPassword}
+              onPress={() => setShow(!show)}
+            >
+              {show ? "Hide" : "Show"}
+            </Text>
+          </View>
+          <TouchableOpacity style={styles.button} onPress={handlerSubmit}>
+            <Text style={{ fontWeight: "normal", color: "#fff", fontSize: 16 }}>
               {" "}
-              Log In
+              Sign in
             </Text>
           </TouchableOpacity>
+          <View
+            style={{
+              marginTop: 20,
+              flexDirection: "row",
+              alignItems: "center",
+              alignSelf: "center",
+            }}
+          >
+            <Text
+              style={{
+                color: "#1B4371",
+                fontWeight: "400",
+                fontSize: 16,
+              }}
+            >
+              Don't have an account?{" "}
+            </Text>
+            <TouchableOpacity
+              style={{ margin: 0 }}
+              onPress={() => navigation.navigate("Registration screen")}
+            >
+              <Text
+                style={{
+                  color: "#FF6C00",
+                  fontWeight: "400",
+                  fontSize: 14,
+                }}
+              >
+                {" "}
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </SafeAreaView>
-      <StatusBar barStyle='light-content' />
-    </View>
+        <StatusBar barStyle='light-content' />
+      </ImageBackground>
+    </Container>
   );
-}
+};
+
+export default Registration;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
   title: {
-    fontSize: 36,
-    fontWeight: "bold",
-    color: "#d5e6b7",
-    alignSelf: "center",
-    paddingBottom: 24,
+    color: "#212121",
+    textAlign: "center",
+    fontFamily: fonts.roboto700,
+    fontSize: 30,
+    marginTop: 92,
+    marginBottom: 32,
   },
   input: {
-    backgroundColor: "#F6F7FB",
-    height: 58,
-    marginBottom: 20,
+    height: 50,
+    padding: 16,
+    borderWidth: 1,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderStyle: "solid",
+    color: "#212121",
+    fontFamily: fonts.roboto400,
     fontSize: 16,
-    borderRadius: 10,
-    padding: 12,
+    lineHeight: 18.75,
   },
   backImage: {
-    width: "100%",
-    height: 340,
-    position: "absolute",
-    top: 0,
+    flex: 1,
     resizeMode: "cover",
+    justifyContent: "flex-end",
   },
-  whiteSheet: {
-    width: "100%",
-    height: "75%",
+  backImagePhoto: {
     position: "absolute",
-    bottom: 0,
-    backgroundColor: "#fff",
-    borderTopLeftRadius: 60,
+    top: -50,
+    width: 120,
+    height: 120,
+    borderRadius: 25,
+    alignSelf: "center",
+    marginBottom: 32,
+    backgroundColor: "#F6F6F6",
   },
   form: {
-    flex: 1,
-    justifyContent: "center",
-    marginHorizontal: 30,
+    position: "relative",
+    backgroundColor: "#FFFFFF",
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    paddingHorizontal: 16,
   },
   button: {
-    backgroundColor: "#609948",
-    height: 58,
-    borderRadius: 10,
+    backgroundColor: "#FF6C00",
+    color: "#FFFFFF",
+    height: 51,
+    borderRadius: 100,
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40,
+    shadowColor: "grey",
+    shadowOpacity: 0.05,
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  addBtnProfPicture: {
+    position: "absolute",
+    top: 30,
+
+    right: 109,
+    width: 25,
+    height: 25,
+    alignSelf: "center",
+  },
+  wrapperInput: { position: "relative" },
+  buttonShowPassword: {
+    position: "absolute",
+    top: 15,
+    right: 16,
+    fontSize: 16,
+    lineHeight: 18.75,
+    color: "#1B4371",
   },
 });
