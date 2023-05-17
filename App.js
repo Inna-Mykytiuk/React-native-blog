@@ -17,11 +17,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <MainStack.Navigator initialRouteName='Login'>
-        <MainStack.Screen
+        {/* <MainStack.Screen
           name='Login'
           component={LoginScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
         <MainStack.Screen
           name='Registration'
           component={RegistrationScreen}

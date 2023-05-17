@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { fonts } from "../../../assets/fonts/fonts";
-// import { AddAvatarIcon, RemoveAvatarIcon } from "../../../Components/Icons";
+import { AddAvatarIcon, RemoveAvatarIcon } from "../../../Components/Icons";
 import { AddAvatarButton, MainButton } from "../../../Components/Buttons";
-import { Ionicons } from "@expo/vector-icons";
+// import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -88,7 +88,8 @@ const RegistrationScreen = () => {
               }}
             >
               <AddAvatarButton onPress={handlerAddAvatar}>
-                <Ionicons name='add-circle-outline' size={30} color='#FF6C00' />
+                {/* <Ionicons name='add-circle-outline' size={30} color='#FF6C00' /> */}
+                <AddAvatarIcon />
               </AddAvatarButton>
             </View>
           ) : (
@@ -100,11 +101,12 @@ const RegistrationScreen = () => {
             >
               <Image source={require("../../../assets/image/avatar.png")} />
               <AddAvatarButton onPress={() => setUserPhoto("")}>
-                <Ionicons
+                {/* <Ionicons
                   name='close-circle-outline'
                   size={30}
                   color='#BDBDBD'
-                />
+                /> */}
+                <RemoveAvatarIcon />
               </AddAvatarButton>
             </View>
           )}
@@ -204,6 +206,12 @@ const styles = StyleSheet.create({
     marginTop: 92,
     marginBottom: 32,
   },
+  // icon: {
+  //   margin: 0,
+  //   padding: 0,
+  //   textAlign: "center",
+  //   alignSelf: "center",
+  // },
   input: {
     height: 50,
     padding: 16,
