@@ -8,8 +8,6 @@ import {
   View,
   ImageBackground,
   TextInput,
-  Image,
-  TouchableOpacity,
   StatusBar,
   // Alert,
   // SafeAreaView,
@@ -120,7 +118,11 @@ const LoginScreen = ({ navigation }) => {
               {show ? "Hide" : "Show"}
             </Text>
           </View>
-          <MainButton onPress={handlerSubmit} text={"Sign in"} />
+          <MainButton
+            style={styles.button}
+            onPress={handlerSubmit}
+            text={"Sign in"}
+          />
           <Text
             style={styles.link}
             onPress={() => navigation.navigate("Registration")}
