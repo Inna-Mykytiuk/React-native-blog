@@ -122,7 +122,9 @@ const ProfileScreen = ({ navigation }) => {
                       <TouchableOpacity
                         style={{ flexDirection: "row", marginRight: 24 }}
                       >
-                        <CommentOnIcon />
+                        <CommentOnIcon
+                          onPress={() => navigation.navigate("CommentsScreen")}
+                        />
                         <Text style={{ marginLeft: 6 }}>
                           {item.commentsCount}
                         </Text>

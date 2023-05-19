@@ -64,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
         <View
           style={{ ...styles.form, paddingBottom: isShowKeyboard ? 79 : 130 }}
         >
-          <Text style={styles.title}>Sign in</Text>
+          <Text style={styles.title}>Login</Text>
           <TextInput
             style={{
               ...styles.input,
@@ -74,7 +74,7 @@ const LoginScreen = ({ navigation }) => {
             }}
             placeholder='Enter email'
             placeholderTextColor='#BDBDBD'
-            textContentType='emailAddress'
+            textContentType='mailAddress'
             value={user.email}
             onFocus={() => handlerFocus("email")}
             onChangeText={(value) =>

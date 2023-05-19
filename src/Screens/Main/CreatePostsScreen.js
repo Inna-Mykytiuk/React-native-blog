@@ -4,6 +4,7 @@ import { Container } from "../../../Components/Container";
 import { CameraIcon, MapPinIcon, TrashIcon } from "../../../Components/Icons";
 import { MainButton, TrashButton } from "../../../Components/Buttons";
 import { fonts } from "../../../assets/fonts/fonts";
+import { Button } from "react-native-web";
 
 const initialStatePosts = {
   name: "",
@@ -23,8 +24,12 @@ const CreatePostsScreen = ({ navigation }) => {
   const [photoPost, setPhotoPost] = useState(null);
 
   const handlerAddPhotoPost = () => {
-    setPhotoPost("../../assets/image/forest.jpg");
+    setPhotoPost(require("../../../assets/image/forest.jpg"));
   };
+
+  useEffect(() => {
+    setPhotoPost((prevState) => ({ ...prevState, photo: photoPost }));
+  }, [photoPost]);
 
   const handlerFocus = (input) => {
     setIsShowKeyboard(true);
@@ -64,9 +69,9 @@ const CreatePostsScreen = ({ navigation }) => {
         }}
       >
         <View style={styles.imageBox}>
-          <View style={styles.iconBox}>
+          <Button style={styles.iconBox} onPress={handlerAddPhotoPost}>
             <CameraIcon style={styles.cameraIcon} />
-          </View>
+          </Button>
         </View>
         <Text style={styles.textStyle}>Download photo</Text>
         <TextInput

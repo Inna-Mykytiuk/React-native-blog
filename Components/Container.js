@@ -36,22 +36,22 @@ export const Container = ({ children }) => {
     SplashScreen.hideAsync();
   }
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView
-        style={{
-          flex: 1,
-          backgroundColor: "#fff",
-          width: dimensions,
-        }}
+    // <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        backgroundColor: "#fff",
+        width: dimensions,
+      }}
+    >
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS == "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS == "ios" ? -163 : -165}
       >
-        <KeyboardAvoidingView
-          style={{ flex: 1 }}
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.OS == "ios" ? -163 : -165}
-        >
-          {children}
-        </KeyboardAvoidingView>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+        {children}
+      </KeyboardAvoidingView>
+    </SafeAreaView>
+    // </TouchableWithoutFeedback>
   );
 };
