@@ -1,12 +1,14 @@
 import { LoginScreen } from "./src/Screens/Auth/LoginScreen";
 import "react-native-gesture-handler";
 import React from "react";
+
 import { RegistrationScreen } from "./src/Screens/Auth/RegistrationScreen";
-// // import { PostsScreen } from "./src/Screens/PostsScreen";
+import { CreatePostsScreen } from "./src/Screens/Main/CreatePostsScreen";
+import { ProfileScreen } from "./src/Screens/Main/ProfileScreen";
+import { Home } from "./src/Screens/Main/Home";
+// import { PostsScreen } from "./src/Screens/PostsScreen";
 
 import { createStackNavigator } from "@react-navigation/stack";
-
-// import { Home } from "./Screens/Main/Home";
 import { NavigationContainer } from "@react-navigation/native";
 
 const MainStack = createStackNavigator();
@@ -18,7 +20,7 @@ const App = () => {
         initialRouteName='Login'
         options={{ headerShown: false }}
       >
-        <MainStack.Screen
+        {/* <MainStack.Screen
           name='Login'
           component={LoginScreen}
           options={{ headerShown: false }}
@@ -29,10 +31,17 @@ const App = () => {
           options={{ headerShown: false }}
         />
 
-        {/* <MainStack.Screen
+        <MainStack.Screen
           name='Home'
           component={Home}
+          options={{ headerShown: false }}
         /> */}
+        <MainStack.Screen
+          name='CreatePostsScreen'
+          component={CreatePostsScreen}
+          options={{ headerShown: false }}
+        />
+        <MainStack.Screen name='ProfileScreen' component={ProfileScreen} />
       </MainStack.Navigator>
     </NavigationContainer>
   );

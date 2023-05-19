@@ -48,7 +48,7 @@ const initStatePost = [
   },
 ];
 
-const ProfileScreen = ({ navigation }) => {
+export const ProfileScreen = ({ navigation }) => {
   const [post, setPost] = useState(initStatePost);
   const [userPhoto, setUserPhoto] = useState(
     "../../../assets/image/avatar.png"
@@ -149,7 +149,6 @@ const ProfileScreen = ({ navigation }) => {
     </Container>
   );
 };
-export default ProfileScreen;
 
 export const profileStyles = StyleSheet.create({
   imgBg: {
