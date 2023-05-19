@@ -4,7 +4,7 @@ import { AddAvatarIcon, RemoveAvatarIcon } from "../../../Components/Icons";
 import { AddAvatarButton, MainButton } from "../../../Components/Buttons";
 // import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
 import {
   StyleSheet,
@@ -25,9 +25,7 @@ const initialStateUser = {
   avatar: "",
 };
 
-const RegistrationScreen = () => {
-  const navigation = useNavigation();
-
+const RegistrationScreen = ({ navigation }) => {
   const [show, setShow] = useState(false);
   const [user, setUser] = useState(initialStateUser);
   const [userPhoto, setUserPhoto] = useState(null);

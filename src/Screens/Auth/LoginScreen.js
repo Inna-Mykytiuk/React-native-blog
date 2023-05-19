@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { fonts } from "../../../assets/fonts/fonts";
 import { MainButton } from "../../../Components/Buttons";
 import { Feather } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
 import {
   StyleSheet,
@@ -21,9 +21,7 @@ const initialStateUser = {
   password: "",
 };
 
-const LoginScreen = () => {
-  const navigation = useNavigation();
-
+const LoginScreen = ({ navigation }) => {
   const [user, setUser] = useState(initialStateUser);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [isFocus, setIsFocus] = useState(false);
