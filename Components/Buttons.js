@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
     height: 25,
     borderRadius: 100,
     backgroundColor: "#ffffff",
-    // backgroundColor: "grey",
   },
   trashButton: {
     width: 70,
