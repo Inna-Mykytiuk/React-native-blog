@@ -312,6 +312,8 @@ import {
   View,
   TouchableOpacity,
   TextInput,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
@@ -357,85 +359,90 @@ export const RegistrationScreen = ({ navigation }) => {
   return (
     <View style={styles.maincontainer}>
       <ImageBackground source={backImage} style={styles.backImg}>
-        <View style={styles.container}>
-          <View style={styles.pfotoContainer}>
-            {!userPhoto ? (
-              <View>
-                <AddAvatarButton onPress={handlerAddAvatar}>
-                  <AddAvatarIcon />
-                </AddAvatarButton>
-              </View>
-            ) : (
-              <View>
-                <ImageBackground
-                  source={require("../../../assets/image/avatar.png")}
-                  style={{ width: "100%", height: "100%" }}
-                />
-                <AddAvatarButton onPress={() => setUserPhoto("")}>
-                  <RemoveAvatarIcon />
-                </AddAvatarButton>
-              </View>
-            )}
-          </View>
-          <Text style={styles.title}>Registration</Text>
-
-          <TextInput
-            style={styles.inputLogin}
-            placeholder='Login'
-            inputMode='text'
-            value={login}
-            onChangeText={handleLogin}
-            placeholderTextColor='#BDBDBD'
-          />
-          <TextInput
-            style={styles.inputMailPassw}
-            placeholder='Email address'
-            inputMode='email'
-            value={mail}
-            onChangeText={handleMail}
-            placeholderTextColor='#BDBDBD'
-          />
-          <TextInput
-            style={styles.inputMailPassw}
-            placeholder='Password'
-            secureTextEntry={show ? false : true}
-            value={password}
-            onChangeText={handlePassword}
-            placeholderTextColor='#BDBDBD'
-          />
-
-          <TouchableOpacity
-            style={styles.passwShow}
-            activeOpacity={0.5}
-            onPress={passwShow}
-          >
-            <Text style={styles.passwShowText} onPress={() => setShow(!show)}>
-              {show ? (
-                <Feather name='eye' size={22} color='grey' />
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+          style={styles.containerKeyB}
+        >
+          <View style={styles.container}>
+            <View style={styles.pfotoContainer}>
+              {!userPhoto ? (
+                <View>
+                  <AddAvatarButton onPress={handlerAddAvatar}>
+                    <AddAvatarIcon />
+                  </AddAvatarButton>
+                </View>
               ) : (
-                <Feather name='eye-off' size={22} color='#BDBDBD' />
+                <View>
+                  <ImageBackground
+                    source={require("../../../assets/image/avatar.png")}
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                  <AddAvatarButton onPress={() => setUserPhoto("")}>
+                    <RemoveAvatarIcon />
+                  </AddAvatarButton>
+                </View>
               )}
-            </Text>
-          </TouchableOpacity>
+            </View>
+            <Text style={styles.title}>Registration</Text>
 
-          <TouchableOpacity
-            style={styles.registerButton}
-            activeOpacity={0.5}
-            onPress={register}
-          >
-            <Text style={styles.registerButtonText}>Sign up</Text>
-          </TouchableOpacity>
+            <TextInput
+              style={styles.inputLogin}
+              placeholder='Login'
+              inputMode='text'
+              value={login}
+              onChangeText={handleLogin}
+              placeholderTextColor='#BDBDBD'
+            />
+            <TextInput
+              style={styles.inputMailPassw}
+              placeholder='Email address'
+              inputMode='email'
+              value={mail}
+              onChangeText={handleMail}
+              placeholderTextColor='#BDBDBD'
+            />
+            <TextInput
+              style={styles.inputMailPassw}
+              placeholder='Password'
+              secureTextEntry={show ? false : true}
+              value={password}
+              onChangeText={handlePassword}
+              placeholderTextColor='#BDBDBD'
+            />
 
-          <TouchableOpacity
-            style={styles.loginLink}
-            activeOpacity={0.5}
-            onPress={() => navigation.navigate("Login")}
-          >
-            <Text style={styles.loginLinkText}>
-              Already have an account? Log in
-            </Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              style={styles.passwShow}
+              activeOpacity={0.5}
+              onPress={passwShow}
+            >
+              <Text style={styles.passwShowText} onPress={() => setShow(!show)}>
+                {show ? (
+                  <Feather name='eye' size={22} color='grey' />
+                ) : (
+                  <Feather name='eye-off' size={22} color='#BDBDBD' />
+                )}
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.registerButton}
+              activeOpacity={0.5}
+              onPress={register}
+            >
+              <Text style={styles.registerButtonText}>Sign up</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.loginLink}
+              activeOpacity={0.5}
+              onPress={() => navigation.navigate("Login")}
+            >
+              <Text style={styles.loginLinkText}>
+                Already have an account? Log in
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
       </ImageBackground>
       <StatusBar style='auto' />
     </View>
@@ -485,6 +492,7 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     pointerEvents: "auto",
+    shadowColor: "grey",
   },
   title: {
     fontWeight: "500",
@@ -534,6 +542,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 100,
     marginTop: 44,
+    shadowColor: "grey",
+    shadowOpacity: 1,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowRadius: 10,
+    elevation: 5,
   },
   registerButtonText: {
     color: "#fff",

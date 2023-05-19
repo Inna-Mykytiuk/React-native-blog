@@ -29,7 +29,7 @@ export const LoginScreen = ({ navigation }) => {
       alert("Enter all data please!!!");
       return;
     }
-    navigation.navigate("Home", { screen: "PostsScreen" });
+    navigation.navigate("Home", { screen: "Posts" });
   };
 
   const passwShow = () => alert(`Your password is: ${password}`);
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
     width: "100%",
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
+    paddingBottom: "10%",
   },
   containerKeyB: {
     justifyContent: "flex-end",
@@ -171,5 +172,3 @@ const styles = StyleSheet.create({
     lineHeight: 19,
   },
 });
-
-export default LoginScreen;

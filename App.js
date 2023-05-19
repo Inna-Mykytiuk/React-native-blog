@@ -18,11 +18,11 @@ const App = () => {
         initialRouteName='Login'
         options={{ headerShown: false }}
       >
-        {/* <MainStack.Screen
+        <MainStack.Screen
           name='Login'
           component={LoginScreen}
           options={{ headerShown: false }}
-        /> */}
+        />
         <MainStack.Screen
           name='Registration'
           component={RegistrationScreen}
