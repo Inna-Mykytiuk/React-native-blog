@@ -20,6 +20,7 @@ import {
 import { AddAvatarButton } from "../../../Components/Buttons";
 import { Container } from "../../../Components/Container";
 import { fonts } from "../../../assets/fonts/fonts";
+import { Feather } from "@expo/vector-icons";
 
 const initStatePost = [
   {
@@ -67,10 +68,11 @@ export const ProfileScreen = ({ navigation }) => {
       >
         <View style={profileStyles.form}>
           <TouchableOpacity
-            style={{ alignItems: "flex-end", marginTop: 22 }}
+            style={{ alignItems: "flex-end", marginTop: 10 }}
+            activeOpacity={0.5}
             onPress={() => navigation.navigate("Login")}
           >
-            <LogOutIcon />
+            <Feather name='log-out' size={24} color='#BDBDBD' />
           </TouchableOpacity>
           {userPhoto ? (
             <View
@@ -114,6 +116,7 @@ export const ProfileScreen = ({ navigation }) => {
                     style={{
                       flex: 1,
                       flexDirection: "row",
+                      marginBottom: 32,
                     }}
                   >
                     <View
@@ -158,6 +161,10 @@ export const profileStyles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "flex-end",
   },
+  logoutButton: {
+    marginLeft: 350,
+    marginTop: -40,
+  },
   form: {
     flex: 1,
     width: "100%",
@@ -173,7 +180,8 @@ export const profileStyles = StyleSheet.create({
     textAlign: "center",
     fontFamily: fonts.roboto700,
     fontSize: 30,
-    marginVertical: 32,
+    marginTop: 80,
+    marginBottom: 32,
   },
   boxAvatar: {
     position: "absolute",

@@ -34,7 +34,7 @@ export const Home = ({ navigation }) => {
           tabBarIcon: ({ color, size }) => (
             <Feather name='grid' size={size} color={color} />
           ),
-          headerLeftContainerStyle: { paddingLeft: 10 },
+          headerLeftContainerStyle: { paddingLeft: 20 },
           headerTitleAlign: "center",
           headerTitleStyle: { paddingBottom: 5 },
           headerRight: () => (
@@ -43,7 +43,7 @@ export const Home = ({ navigation }) => {
               activeOpacity={0.5}
               onPress={() => navigation.navigate("Login")}
             >
-              <Feather name='log-out' size={24} color='gray' />
+              <Feather name='log-out' size={24} color='#BDBDBD' />
             </TouchableOpacity>
           ),
         }}
@@ -85,5 +85,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#ff8c00", // Змінено фон активної вкладки на оранжевий
     borderRadius: 20, // Додано закруглені кути
     padding: 10, // Додано відступи
+  },
+  logoutButton: {
+    // marginLeft: 30,
+    paddingRight: 30,
   },
 });
