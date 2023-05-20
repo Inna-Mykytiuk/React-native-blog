@@ -66,9 +66,12 @@ export const ProfileScreen = ({ navigation }) => {
         style={profileStyles.imgBg}
       >
         <View style={profileStyles.form}>
-          <View style={{ alignItems: "flex-end", marginTop: 22 }}>
-            <LogOutIcon onPress={() => navigation.navigate("Login")} />
-          </View>
+          <TouchableOpacity
+            style={{ alignItems: "flex-end", marginTop: 22 }}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <LogOutIcon />
+          </TouchableOpacity>
           {userPhoto ? (
             <View
               style={{
@@ -121,10 +124,9 @@ export const ProfileScreen = ({ navigation }) => {
                     >
                       <TouchableOpacity
                         style={{ flexDirection: "row", marginRight: 24 }}
+                        onPress={() => navigation.navigate("CommentsScreen")}
                       >
-                        <CommentOnIcon
-                          onPress={() => navigation.navigate("CommentsScreen")}
-                        />
+                        <CommentOnIcon />
                         <Text style={{ marginLeft: 6 }}>
                           {item.commentsCount}
                         </Text>
