@@ -24,7 +24,7 @@ import { fonts } from "../../../assets/fonts/fonts";
 const initStatePost = [
   {
     id: "1",
-    image: "../../../assets/image/forest.jpg",
+    image: require("../../../assets/image/forest.jpg"),
     nameLocation: "Forest",
     location: "Ukraine",
     commentsCount: 8,
@@ -32,7 +32,7 @@ const initStatePost = [
   },
   {
     id: "2",
-    image: "../../../assets/image/sunset.jpg",
+    image: require("../../../assets/image/sunset.jpg"),
     nameLocation: "Sunset on Black Sea",
     location: "Ukraine",
     commentsCount: 10,
@@ -40,7 +40,7 @@ const initStatePost = [
   },
   {
     id: "3",
-    image: "../../../assets/image/old_house.jpg",
+    image: require("../../../assets/image/old_house.jpg"),
     nameLocation: "Old house in Venice",
     location: "Italy",
     commentsCount: 50,
@@ -104,11 +104,11 @@ export const ProfileScreen = ({ navigation }) => {
               renderItem={({ item, index }) => (
                 <View>
                   <Image
-                    source={{ uri: item.image }}
+                    source={item.image}
                     style={{ width: "100%", height: 240, borderRadius: 8 }}
                   />
                   <Text style={{ fontSize: 16, color: "#000" }}>
-                    {item.name}
+                    {item.nameLocation}
                   </Text>
                   <View
                     style={{
@@ -173,7 +173,7 @@ export const profileStyles = StyleSheet.create({
     textAlign: "center",
     fontFamily: fonts.roboto700,
     fontSize: 30,
-    marginTop: 46,
+    marginVertical: 32,
   },
   boxAvatar: {
     position: "absolute",

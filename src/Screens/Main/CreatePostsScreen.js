@@ -7,9 +7,8 @@ import {
   ImageBackground,
 } from "react-native";
 import React from "react";
-import { EvilIcons, Ionicons, FontAwesome } from "@expo/vector-icons";
+import { EvilIcons, Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-// const trashImg = require("./trash.png");
 import { CameraIcon, MapPinIcon, TrashIcon } from "../../../Components/Icons";
 import { fonts } from "../../../assets/fonts/fonts";
 import { Container } from "../../../Components/Container";
@@ -22,12 +21,6 @@ export const CreatePost = ({ navigation }) => {
       <View style={styles.postContainer}>
         <View style={styles.postImg}>
           <TouchableOpacity style={styles.postImgAdd} activeOpacity={0.5}>
-            {/* <FontAwesome
-              name='camera'
-              size={24}
-              color='black'
-              style={styles.cameraIcon}
-            /> */}
             <CameraIcon style={styles.cameraIcon} size={24} />
           </TouchableOpacity>
         </View>
