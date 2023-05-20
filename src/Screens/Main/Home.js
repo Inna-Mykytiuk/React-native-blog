@@ -34,7 +34,7 @@ export const Home = ({ navigation }) => {
           tabBarIcon: ({ color, size }) => (
             <Feather name='grid' size={size} color={color} />
           ),
-          headerLeftContainerStyle: { paddingLeft: 20 },
+          // headerLeftContainerStyle: { paddingLeft: 20 },
           headerTitleAlign: "center",
           headerTitleStyle: { paddingBottom: 5 },
           headerRight: () => (
@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
     padding: 10, // Додано відступи
   },
   logoutButton: {
-    // marginLeft: 30,
     paddingRight: 30,
   },
 });

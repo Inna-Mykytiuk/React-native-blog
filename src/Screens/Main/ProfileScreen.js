@@ -68,7 +68,7 @@ export const ProfileScreen = ({ navigation }) => {
       >
         <View style={profileStyles.form}>
           <TouchableOpacity
-            style={{ alignItems: "flex-end", marginTop: 10 }}
+            style={{ alignItems: "flex-end", marginTop: 11 }}
             activeOpacity={0.5}
             onPress={() => navigation.navigate("Login")}
           >
@@ -180,7 +180,8 @@ export const profileStyles = StyleSheet.create({
     textAlign: "center",
     fontFamily: fonts.roboto700,
     fontSize: 30,
-    marginTop: 80,
+    //Замінити на 92
+    marginTop: 60,
     marginBottom: 32,
   },
   boxAvatar: {
