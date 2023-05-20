@@ -241,31 +241,23 @@ import { ProfileScreen } from "./ProfileScreen";
 const Tab = createBottomTabNavigator();
 
 export const Home = ({ navigation }) => {
-  const handleBackPress = () => {
-    navigation.navigate("Posts");
-  };
-
   return (
     <Tab.Navigator
       initialRouteName='Posts'
       screenOptions={{
         tabBarStyle: { height: 80 },
         tabBarShowLabel: false,
-        tabStyle: styles.tabStyle, // Додано стиль для кожної вкладки
+        // tabStyle: styles.tabStyle, // Додано стиль для кожної вкладки
         // Додано стиль для активної вкладки
-      }}
-      tabBarOptions={{
         activeTintColor: "#fff",
         inactiveTintColor: "#212121",
         activeTabStyle: styles.activeTabStyle,
         activeBackgroundColor: "#FF6C00",
-        style: {
-          borderTopWidth: 1,
-          borderTopColor: "#ccc",
-        },
         tabStyle: {
           borderRadius: 50,
           margin: "12px",
+          justifyContent: "center",
+          alignItems: "center",
         },
       }}
     >
@@ -276,7 +268,9 @@ export const Home = ({ navigation }) => {
           tabBarIcon: ({ color, size }) => (
             <Feather name='grid' size={size} color={color} />
           ),
-          headerRightContainerStyle: { paddingRight: 20 },
+          headerLeftContainerStyle: { paddingLeft: 10 },
+          headerTitleAlign: "center",
+          headerTitleStyle: { paddingBottom: 5 },
           headerRight: () => (
             <TouchableOpacity
               style={styles.logoutButton}
@@ -296,13 +290,13 @@ export const Home = ({ navigation }) => {
             <Feather name='plus' size={size} color={color} />
           ),
           headerLeft: () => (
-            <TouchableOpacity
-              style={styles.backButton}
-              activeOpacity={0.5}
-              onPress={handleBackPress}
-            >
-              <Feather name='arrow-left' size={24} color='gray' />
-            </TouchableOpacity>
+            // <TouchableOpacity
+            //   style={styles.backButton}
+            //   activeOpacity={0.5}
+            //   onPress={handleBackPress}
+            // >
+            <Feather name='arrow-left' size={24} color='gray' />
+            // </TouchableOpacity>
           ),
           headerShown: false,
           tabBarStyle: { display: "none" },
@@ -315,6 +309,7 @@ export const Home = ({ navigation }) => {
           tabBarIcon: ({ color, size }) => (
             <Feather name='user' color={color} size={size} />
           ),
+          headerShown: false,
         }}
       />
     </Tab.Navigator>

@@ -124,7 +124,7 @@ export const ProfileScreen = ({ navigation }) => {
                     >
                       <TouchableOpacity
                         style={{ flexDirection: "row", marginRight: 24 }}
-                        onPress={() => navigation.navigate("CommentsScreen")}
+                        onPress={() => navigation.navigate("Comments")}
                       >
                         <CommentOnIcon />
                         <Text style={{ marginLeft: 6 }}>

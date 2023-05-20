@@ -43,8 +43,21 @@ export const Navigation = () => {
           component={CreatePost}
           options={{ headerShown: false }}
         /> */}
-        <MainStack.Screen name='CommentsScreen' component={CommentsScreen} />
-        <MainStack.Screen name='Profile' component={ProfileScreen} />
+        <MainStack.Screen
+          name='Comments'
+          component={CommentsScreen}
+          options={{
+            headerLeftContainerStyle: { paddingLeft: 10 },
+            headerTitleAlign: "center",
+
+            headerTitleStyle: { paddingBottom: 5 },
+          }}
+        />
+        {/* <MainStack.Screen
+          name='Profile'
+          component={ProfileScreen}
+          options={{ headerShown: false }}
+        /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );

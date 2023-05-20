@@ -79,16 +79,13 @@ export const CreatePostsScreen = ({ navigation }) => {
           },
           tabBarStyle: {
             height: 80,
-
-            borderTopWidth: "none",
+            borderTop: "none",
           },
           headerLeft: () => (
             <TouchableOpacity
               style={styles.logoutButton}
               activeOpacity={0.5}
-              onPress={() =>
-                navigation.navigate("Home", { screen: "PostsScreen" })
-              }
+              onPress={() => navigation.navigate("Home", { screen: "Posts" })}
             >
               <Ionicons name='arrow-back-sharp' size={24} color='black' />
             </TouchableOpacity>
