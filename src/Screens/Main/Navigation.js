@@ -2,7 +2,6 @@ import "react-native-gesture-handler";
 import React from "react";
 
 import { RegistrationScreen } from "../Auth/RegistrationScreen";
-import { CreatePost } from "../Main/CreatePostsScreen";
 import { CommentsScreen } from "../Second/CommentsScreen";
 import { Home } from "./Home";
 import { LoginScreen } from "../Auth/LoginScreen";
@@ -53,11 +52,6 @@ export const Navigation = () => {
             headerTitleStyle: { paddingBottom: 5 },
           }}
         />
-        {/* <MainStack.Screen
-          name='Profile'
-          component={ProfileScreen}
-          options={{ headerShown: false }}
-        /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );
