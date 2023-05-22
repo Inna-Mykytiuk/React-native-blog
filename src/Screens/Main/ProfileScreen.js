@@ -8,6 +8,7 @@ import {
   SafeAreaView,
   FlatList,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import {
   AddAvatarIcon,
@@ -104,7 +105,7 @@ export const ProfileScreen = ({ navigation }) => {
             <FlatList
               data={post}
               renderItem={({ item, index }) => (
-                <View>
+                <View style={{ paddingBottom: 40 }}>
                   <Image
                     source={item.image}
                     style={{ width: "100%", height: 240, borderRadius: 8 }}
