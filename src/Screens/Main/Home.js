@@ -51,14 +51,24 @@ export const Home = ({ navigation }) => {
         }}
       />
       <Tab.Screen
-        name='CreatePosts'
+        name='Create Posts'
         component={CreatePostsScreen}
         options={{
+          headerLeftContainerStyle: { paddingLeft: 10 },
+          headerTitleAlign: "center",
+
+          headerTitleStyle: { paddingBottom: 5 },
           tabBarIcon: ({ focused }) => <PlusIcon focused={focused} />,
           headerLeft: () => (
-            <Feather name='arrow-left' size={24} color='gray' />
+            <TouchableOpacity
+              // style={styles.logoutButton}
+              activeOpacity={0.5}
+              // onPress={() => navigation.navigate("Posts")}
+              onPress={() => navigation.navigate("Posts")}
+            >
+              <Feather name='arrow-left' size={24} color='gray' />
+            </TouchableOpacity>
           ),
-          headerShown: false,
           tabBarStyle: { display: "none" },
         }}
       />

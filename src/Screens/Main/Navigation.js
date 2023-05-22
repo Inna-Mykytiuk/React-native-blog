@@ -49,7 +49,7 @@ export const Navigation = () => {
             headerTitleStyle: { paddingBottom: 5 },
           }}
         />
-        <MainStack.Screen
+        {/* <MainStack.Screen
           name='Create Posts'
           component={CreatePostsScreen}
           options={{
@@ -58,7 +58,7 @@ export const Navigation = () => {
 
             headerTitleStyle: { paddingBottom: 5 },
           }}
-        />
+        /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );
