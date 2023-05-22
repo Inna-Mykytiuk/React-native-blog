@@ -1,11 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { PostsScreen } from "./PostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
-import { CommentsScreen } from "../Second/CommentsScreen";
 
 import {
   ArrowLeftIcon,
@@ -56,14 +55,11 @@ export const Home = ({ navigation }) => {
         options={{
           headerLeftContainerStyle: { paddingLeft: 10 },
           headerTitleAlign: "center",
-
           headerTitleStyle: { paddingBottom: 5 },
           tabBarIcon: ({ focused }) => <PlusIcon focused={focused} />,
           headerLeft: () => (
             <TouchableOpacity
-              // style={styles.logoutButton}
               activeOpacity={0.5}
-              // onPress={() => navigation.navigate("Posts")}
               onPress={() => navigation.navigate("Posts")}
             >
               <Feather name='arrow-left' size={24} color='gray' />

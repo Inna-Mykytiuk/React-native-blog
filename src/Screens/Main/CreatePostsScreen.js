@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-// import { EvilIcons, Ionicons } from "@expo/vector-icons";
-// import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
   Text,
   TextInput,
@@ -126,46 +124,6 @@ export const CreatePostsScreen = ({ navigation }) => {
     </Container>
   );
 };
-
-// const BottomTabs = createBottomTabNavigator();
-
-// export const CreatePostsScreen = ({ navigation }) => {
-//   return (
-//     <BottomTabs.Navigator
-//       screenOptions={{
-//         tabBarShowLabel: false,
-//         tabBarStyle: {
-//           height: 80,
-//           borderBottomColor: "#E8E8E8",
-//           borderBottomWidth: 2,
-//         },
-//       }}
-//     >
-//       <BottomTabs.Screen
-//         options={{
-//           tabBarStyle: {
-//             height: 80,
-//             borderTop: "none",
-//           },
-//           headerLeft: () => (
-//             <TouchableOpacity
-//               style={styles.logoutButton}
-//               activeOpacity={0.5}
-//               onPress={() => navigation.navigate("Home", { screen: "Posts" })}
-//             >
-//               <Ionicons name='arrow-back-sharp' size={24} color='black' />
-//             </TouchableOpacity>
-//           ),
-//           headerLeftContainerStyle: { paddingLeft: 10 },
-//           headerTitleAlign: "center",
-//           headerTitleStyle: { paddingBottom: 5 },
-//         }}
-//         name='Create post'
-//         component={CreatePost}
-//       />
-//     </BottomTabs.Navigator>
-//   );
-// };
 
 export const styles = StyleSheet.create({
   imageBox: {
