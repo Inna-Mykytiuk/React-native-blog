@@ -103,9 +103,10 @@ export const ProfileScreen = ({ navigation }) => {
           <Text style={profileStyles.title}>Natali Romanova</Text>
           <SafeAreaView style={{ flex: 1 }}>
             <FlatList
+              style={{ marginBottom: 150, paddingBottom: 150 }}
               data={post}
               renderItem={({ item, index }) => (
-                <View style={{ paddingBottom: 40 }}>
+                <View>
                   <Image
                     source={item.image}
                     style={{ width: "100%", height: 240, borderRadius: 8 }}

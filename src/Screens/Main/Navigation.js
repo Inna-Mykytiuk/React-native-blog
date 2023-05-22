@@ -6,6 +6,7 @@ import { CommentsScreen } from "../Second/CommentsScreen";
 import { Home } from "./Home";
 import { LoginScreen } from "../Auth/LoginScreen";
 import { ProfileScreen } from "./ProfileScreen";
+import { CreatePostsScreen } from "./CreatePostsScreen";
 
 // import { PostsScreen } from "./src/Screens/PostsScreen";
 
@@ -37,14 +38,20 @@ export const Navigation = () => {
           component={Home}
           options={{ headerShown: false }}
         />
-        {/* <MainStack.Screen
-          name='CreatePost'
-          component={CreatePost}
-          options={{ headerShown: false }}
-        /> */}
+
         <MainStack.Screen
           name='Comments'
           component={CommentsScreen}
+          options={{
+            headerLeftContainerStyle: { paddingLeft: 10 },
+            headerTitleAlign: "center",
+
+            headerTitleStyle: { paddingBottom: 5 },
+          }}
+        />
+        <MainStack.Screen
+          name='Create Posts'
+          component={CreatePostsScreen}
           options={{
             headerLeftContainerStyle: { paddingLeft: 10 },
             headerTitleAlign: "center",

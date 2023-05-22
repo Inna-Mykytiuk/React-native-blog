@@ -5,6 +5,15 @@ import { Feather } from "@expo/vector-icons";
 import { CreatePostsScreen } from "./CreatePostsScreen";
 import { PostsScreen } from "./PostsScreen";
 import { ProfileScreen } from "./ProfileScreen";
+import { CommentsScreen } from "../Second/CommentsScreen";
+
+import {
+  ArrowLeftIcon,
+  GridIcon,
+  LogOutIcon,
+  PlusIcon,
+  UserIcon,
+} from "../../../Components/Icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -13,27 +22,20 @@ export const Home = ({ navigation }) => {
     <Tab.Navigator
       initialRouteName='Posts'
       screenOptions={{
-        tabBarStyle: { height: 80 },
-        tabBarShowLabel: false,
-        activeTintColor: "#fff",
-        inactiveTintColor: "#212121",
-        activeTabStyle: styles.activeTabStyle,
-        activeBackgroundColor: "#FF6C00",
-        tabStyle: {
-          borderRadius: 50,
-          margin: "12px",
-          justifyContent: "center",
-          alignItems: "center",
+        tabBarStyle: {
+          height: 83,
+          paddingTop: 9,
+          boxShadow: "0px -0.5px 0px rgba(0, 0, 0, 0.3)",
+          paddingLeft: 45,
         },
+        tabBarLabel: () => null,
       }}
     >
       <Tab.Screen
         name='Posts'
         component={PostsScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Feather name='grid' size={size} color={color} />
-          ),
+          tabBarIcon: ({ focused }) => <GridIcon focused={focused} />,
           // headerLeftContainerStyle: { paddingLeft: 20 },
           headerTitleAlign: "center",
           headerTitleStyle: { paddingBottom: 5 },
@@ -52,9 +54,7 @@ export const Home = ({ navigation }) => {
         name='CreatePosts'
         component={CreatePostsScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Feather name='plus' size={size} color={color} />
-          ),
+          tabBarIcon: ({ focused }) => <PlusIcon focused={focused} />,
           headerLeft: () => (
             <Feather name='arrow-left' size={24} color='gray' />
           ),
@@ -66,9 +66,7 @@ export const Home = ({ navigation }) => {
         name='Profile'
         component={ProfileScreen}
         options={{
-          tabBarIcon: ({ color, size }) => (
-            <Feather name='user' color={color} size={size} />
-          ),
+          tabBarIcon: ({ focused }) => <UserIcon focused={focused} />,
           headerShown: false,
         }}
       />
@@ -77,15 +75,6 @@ export const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  tabStyle: {
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  activeTabStyle: {
-    backgroundColor: "#ff8c00", // Змінено фон активної вкладки на оранжевий
-    borderRadius: 20, // Додано закруглені кути
-    padding: 10, // Додано відступи
-  },
   logoutButton: {
     paddingRight: 30,
   },
