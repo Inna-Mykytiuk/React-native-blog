@@ -45,7 +45,7 @@ export const RegistrationScreen = ({ navigation }) => {
   const register = () => {
     setIsShowKeyboard(false);
     if (!login || !mail || !password) {
-      alert("Enter all data pleace!!!");
+      alert("Enter all data please!!!");
       return;
     }
     if (!validateEmail(mail)) {
