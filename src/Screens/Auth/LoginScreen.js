@@ -141,6 +141,11 @@ export const LoginScreen = ({ navigation }) => {
   const handleMail = (text) => {
     setMail(text);
   };
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handlePassword = (text) => {
     setPassword(text);
   };
@@ -149,6 +154,10 @@ export const LoginScreen = ({ navigation }) => {
     setIsShowKeyboard(false);
     if (!mail || !password) {
       alert("Enter all data please!!!");
+      return;
+    }
+    if (!validateEmail(mail)) {
+      alert("Invalid email address!");
       return;
     }
 
@@ -225,6 +234,11 @@ const styles = StyleSheet.create({
   maincontainer: {
     flex: 1,
     alignItems: "center",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    textAlign: "center",
   },
   backImage: {
     flex: 1,

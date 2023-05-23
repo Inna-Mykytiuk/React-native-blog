@@ -11,9 +11,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -23,7 +21,12 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.tokio1987.Reactnativeblog",
-      "softwareKeyboardLayoutMode": "pan"
+      "softwareKeyboardLayoutMode": "pan",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBrdDJg5ODd--w7cYUnHX1TWS5k3nRKRCY"
+        }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

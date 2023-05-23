@@ -102,6 +102,56 @@ export const ProfileScreen = ({ navigation }) => {
           )}
           <Text style={profileStyles.title}>Natali Romanova</Text>
           <SafeAreaView style={{ flex: 1 }}>
+            {/* <ScrollView style={{ marginBottom: 150, paddingBottom: 150 }}>
+              {initStatePost.map((item) => {
+                return (
+                  <View key={item.id}>
+                    <Image
+                      source={item.image}
+                      style={{ width: "100%", height: 240, borderRadius: 8 }}
+                    />
+                    <Text style={{ fontSize: 16, color: "#000" }}>
+                      {item.nameLocation}
+                    </Text>
+                    <View
+                      style={{
+                        flex: 1,
+                        flexDirection: "row",
+                        marginBottom: 32,
+                      }}
+                    >
+                      <View
+                        style={{
+                          flex: 2,
+                          flexDirection: "row",
+                        }}
+                      >
+                        <TouchableOpacity
+                          style={{ flexDirection: "row", marginRight: 24 }}
+                          onPress={() => navigation.navigate("Comments")}
+                        >
+                          <CommentOnIcon />
+                          <Text style={{ marginLeft: 6 }}>
+                            {item.commentsCount}
+                          </Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{ flexDirection: "row" }}>
+                          <LikeOnIcon />
+                          <Text style={{ marginLeft: 6 }}>
+                            {item.likesCount}
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                      <TouchableOpacity style={{ flexDirection: "row" }}>
+                        <MapPinIcon />
+                        <Text style={{ marginLeft: 6 }}>{item.location}</Text>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                );
+              })}
+            </ScrollView> */}
+
             <FlatList
               style={{ marginBottom: 150, paddingBottom: 150 }}
               data={post}

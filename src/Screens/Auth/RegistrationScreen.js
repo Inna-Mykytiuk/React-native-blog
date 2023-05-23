@@ -27,9 +27,15 @@ export const RegistrationScreen = ({ navigation }) => {
   const handleLogin = (text) => {
     setLogin(text);
   };
+
   const handleMail = (text) => {
     setMail(text);
   };
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const handlePassword = (text) => {
     setPassword(text);
   };
@@ -44,9 +50,15 @@ export const RegistrationScreen = ({ navigation }) => {
       alert("Enter all data pleace!!!");
       return;
     }
+    if (!validateEmail(mail)) {
+      alert("Invalid email address!");
+      return;
+    }
+
     setLogin("");
     setMail("");
     setPassword("");
+
     navigation.navigate("Home", { screen: "PostsScreen" });
   };
 
@@ -55,93 +67,88 @@ export const RegistrationScreen = ({ navigation }) => {
   return (
     <View style={styles.maincontainer}>
       <ImageBackground source={backImage} style={styles.backImg}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS == "ios" ? "padding" : "height"}
-          style={styles.containerKeyB}
-        >
-          <View style={{ ...styles.container, paddingBottom: 78 }}>
-            <View style={styles.pfotoContainer}>
-              {!userPhoto ? (
-                <View>
-                  <AddAvatarButton onPress={handlerAddAvatar}>
-                    <AddAvatarIcon />
-                  </AddAvatarButton>
-                </View>
-              ) : (
-                <View>
-                  <ImageBackground
-                    source={require("../../../assets/image/avatar.png")}
-                    style={{ width: "100%", height: "100%" }}
-                  />
-                  <AddAvatarButton onPress={() => setUserPhoto("")}>
-                    <RemoveAvatarIcon />
-                  </AddAvatarButton>
-                </View>
-              )}
-            </View>
-            <Text style={styles.title}>Registration</Text>
-
-            <TextInput
-              style={styles.inputLogin}
-              placeholder='Login'
-              inputMode='text'
-              value={login}
-              onChangeText={handleLogin}
-              onFocus={() => setIsShowKeyboard(true)}
-              placeholderTextColor='#BDBDBD'
-            />
-            <TextInput
-              style={styles.inputMailPassw}
-              placeholder='Email address'
-              inputMode='email'
-              value={mail}
-              onChangeText={handleMail}
-              onFocus={() => setIsShowKeyboard(true)}
-              placeholderTextColor='#BDBDBD'
-            />
-            <TextInput
-              style={styles.inputMailPassw}
-              placeholder='Password'
-              secureTextEntry={show ? false : true}
-              value={password}
-              onChangeText={handlePassword}
-              onFocus={() => setIsShowKeyboard(true)}
-              placeholderTextColor='#BDBDBD'
-            />
-
-            <TouchableOpacity
-              style={styles.passwShow}
-              activeOpacity={0.5}
-              onPress={passwShow}
-            >
-              <Text style={styles.passwShowText} onPress={() => setShow(!show)}>
-                {show ? (
-                  <Feather name='eye' size={22} color='grey' />
-                ) : (
-                  <Feather name='eye-off' size={22} color='#BDBDBD' />
-                )}
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.registerButton}
-              activeOpacity={0.5}
-              onPress={register}
-            >
-              <Text style={styles.registerButtonText}>Sign up</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={styles.loginLink}
-              activeOpacity={0.5}
-              onPress={() => navigation.navigate("Login")}
-            >
-              <Text style={styles.loginLinkText}>
-                Already have an account? Log in
-              </Text>
-            </TouchableOpacity>
+        <View style={{ ...styles.container, paddingBottom: 68 }}>
+          <View style={styles.pfotoContainer}>
+            {!userPhoto ? (
+              <View>
+                <AddAvatarButton onPress={handlerAddAvatar}>
+                  <AddAvatarIcon />
+                </AddAvatarButton>
+              </View>
+            ) : (
+              <View>
+                <ImageBackground
+                  source={require("../../../assets/image/avatar.png")}
+                  style={{ width: "100%", height: "100%" }}
+                />
+                <AddAvatarButton onPress={() => setUserPhoto("")}>
+                  <RemoveAvatarIcon />
+                </AddAvatarButton>
+              </View>
+            )}
           </View>
-        </KeyboardAvoidingView>
+          <Text style={styles.title}>Registration</Text>
+
+          <TextInput
+            style={styles.inputLogin}
+            placeholder='Login'
+            inputMode='text'
+            value={login}
+            onChangeText={handleLogin}
+            onFocus={() => setIsShowKeyboard(true)}
+            placeholderTextColor='#BDBDBD'
+          />
+          <TextInput
+            style={styles.inputMailPassw}
+            placeholder='Email address'
+            inputMode='email'
+            value={mail}
+            onChangeText={handleMail}
+            onFocus={() => setIsShowKeyboard(true)}
+            placeholderTextColor='#BDBDBD'
+          />
+          <TextInput
+            style={styles.inputMailPassw}
+            placeholder='Password'
+            secureTextEntry={show ? false : true}
+            value={password}
+            onChangeText={handlePassword}
+            onFocus={() => setIsShowKeyboard(true)}
+            placeholderTextColor='#BDBDBD'
+          />
+
+          <TouchableOpacity
+            style={styles.passwShow}
+            activeOpacity={0.5}
+            onPress={passwShow}
+          >
+            <Text style={styles.passwShowText} onPress={() => setShow(!show)}>
+              {show ? (
+                <Feather name='eye' size={22} color='grey' />
+              ) : (
+                <Feather name='eye-off' size={22} color='#BDBDBD' />
+              )}
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.registerButton}
+            activeOpacity={0.5}
+            onPress={register}
+          >
+            <Text style={styles.registerButtonText}>Sign up</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.loginLink}
+            activeOpacity={0.5}
+            onPress={() => navigation.navigate("Login")}
+          >
+            <Text style={styles.loginLinkText}>
+              Already have an account? Log in
+            </Text>
+          </TouchableOpacity>
+        </View>
       </ImageBackground>
       <StatusBar style='auto' />
     </View>
