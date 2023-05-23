@@ -5,8 +5,6 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  KeyboardAvoidingView,
-  Platform,
 } from "react-native";
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
