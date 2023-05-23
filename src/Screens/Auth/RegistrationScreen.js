@@ -21,24 +21,8 @@ export const RegistrationScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [userPhoto, setUserPhoto] = useState(null);
   const [show, setShow] = useState(false);
-  const [isFocus, setIsFocus] = useState(false);
+
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
-
-  const handlerFocus = (input) => {
-    setIsShowKeyboard(true);
-    setIsFocus((prevState) => ({
-      ...prevState,
-      [input]: true,
-    }));
-  };
-
-  const handlerEndEditing = (input) => {
-    setIsShowKeyboard(false);
-    setIsFocus((prevState) => ({
-      ...prevState,
-      [input]: false,
-    }));
-  };
 
   const handleLogin = (text) => {
     setLogin(text);
@@ -103,8 +87,7 @@ export const RegistrationScreen = ({ navigation }) => {
               inputMode='text'
               value={login}
               onChangeText={handleLogin}
-              onFocus={() => handlerFocus("login")}
-              onEndEditing={() => handlerEndEditing("login")}
+              onFocus={() => setIsShowKeyboard(true)}
               placeholderTextColor='#BDBDBD'
             />
             <TextInput
@@ -113,8 +96,7 @@ export const RegistrationScreen = ({ navigation }) => {
               inputMode='email'
               value={mail}
               onChangeText={handleMail}
-              onFocus={() => handlerFocus("email")}
-              onEndEditing={() => handlerEndEditing("email")}
+              onFocus={() => setIsShowKeyboard(true)}
               placeholderTextColor='#BDBDBD'
             />
             <TextInput
@@ -123,8 +105,7 @@ export const RegistrationScreen = ({ navigation }) => {
               secureTextEntry={show ? false : true}
               value={password}
               onChangeText={handlePassword}
-              onFocus={() => handlerFocus("password")}
-              onEndEditing={() => handlerEndEditing("password")}
+              onFocus={() => setIsShowKeyboard(true)}
               placeholderTextColor='#BDBDBD'
             />
 
