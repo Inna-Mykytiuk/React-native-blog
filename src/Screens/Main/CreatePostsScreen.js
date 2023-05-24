@@ -6,11 +6,13 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { Container } from "../../../Components/Container";
 import { CameraIcon, MapPinIcon, TrashIcon } from "../../../Components/Icons";
 import { MainButton, TrashButton } from "../../../Components/Buttons";
 import { fonts } from "../../../assets/fonts/fonts";
+import { Camera, CameraType } from "expo-camera";
 
 const initialStatePosts = {
   name: "",
@@ -27,7 +29,17 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [isFocus, setIsFocus] = useState(initialStateFocus);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [posts, setPosts] = useState(initialStatePosts);
+
   const [photoPost, setPhotoPost] = useState(null);
+
+  const [camera, setCamera] = useState(null);
+  const [photo, setPhoto] = useState(null);
+
+  const takePhoto = async () => {
+    const photo = await camera.takePictureAsync();
+    setPhoto(photo.uri);
+    console.log("photo", photo);
+  };
 
   const handlerAddPhotoPost = () => {
     setPhotoPost("../../../assets/image/forest.jpg");
@@ -55,11 +67,17 @@ export const CreatePostsScreen = ({ navigation }) => {
     setIsShowKeyboard(false);
     setPosts(initialStatePosts);
 
-    navigation.navigate("Comments");
+    navigation.navigate("Posts", { photo });
   };
+
+  // const sendPhoto = () => {
+  //   console.log("navigation", navigation);
+  //   navigation.navigate("Posts", { photo });
+  // };
 
   const handlerTrash = () => {
     setIsShowKeyboard(false);
+    setPosts(initialStatePosts);
   };
 
   return (
@@ -71,10 +89,21 @@ export const CreatePostsScreen = ({ navigation }) => {
         }}
       >
         <View style={styles.imageBox}>
-          <View style={styles.iconBox}>
-            <CameraIcon style={styles.cameraIcon} />
-          </View>
+          <Camera style={styles.camera} ref={setCamera}>
+            {photo && (
+              <View style={styles.takePhotoContainer}>
+                <Image
+                  source={{ uri: photo }}
+                  style={{ height: 70, width: 70 }}
+                />
+              </View>
+            )}
+            <TouchableOpacity onPress={takePhoto} style={styles.iconBox}>
+              <CameraIcon style={styles.cameraIcon} />
+            </TouchableOpacity>
+          </Camera>
         </View>
+
         <Text style={styles.textStyle}>Download photo</Text>
         <TextInput
           value={posts.name}
@@ -126,11 +155,38 @@ export const CreatePostsScreen = ({ navigation }) => {
 };
 
 export const styles = StyleSheet.create({
+  camera: {
+    height: 240,
+    alignItems: "center",
+    borderRadius: 10,
+    borderWidth: 1,
+  },
+  // snap: {
+  //   color: "#fff",
+  // },
+  // snapContainer: {
+  //   marginTop: 200,
+  //   borderWidth: 1,
+
+  //   borderColor: "#ff0000",
+  //   width: 70,
+  //   height: 70,
+  //   borderRadius: 50,
+  //   justifyContent: "center",
+  //   alignItems: "center",
+  // },
+  takePhotoContainer: {
+    position: "absolute",
+    top: 10,
+    left: 10,
+    borderColor: "#fff",
+    borderWidth: 1,
+  },
   imageBox: {
     width: "100%",
     height: 240,
     backgroundColor: "#F6F6F6",
-    borderRadius: 8,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: "#E8E8E8",
     marginBottom: 8,

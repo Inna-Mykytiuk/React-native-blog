@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import { View, Text, Image } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Text, Image, StyleSheet, FlatList } from "react-native";
 import { Container } from "../../../Components/Container";
 import { fonts } from "../../../assets/fonts/fonts";
 
 export const PostsScreen = ({ route }) => {
+  const [posts, setPosts] = useState([]);
+  console.log("route.params", route.params);
+
   const userData = route.params;
+
+  useEffect(() => {
+    if (route.params) {
+      setPosts((prevState) => [...prevState, route.params]);
+    }
+  }, [route.params]);
 
   return (
     <Container>
@@ -22,11 +31,38 @@ export const PostsScreen = ({ route }) => {
         />
         <View style={{ marginLeft: 8 }}>
           <Text style={{ fontFamily: fonts.roboto700 }}>
-            {userData?.user.login || "Natali Romanova"}
+            {userData?.user?.login || "Natali Romanova"}
           </Text>
-          <Text>{userData?.user.email || "email@example.com"}</Text>
+          <Text>{userData?.user?.email || "email@example.com"}</Text>
         </View>
+      </View>
+      <View style={styles.container}>
+        <FlatList
+          data={posts}
+          keyExtractor={(item, indx) => indx.toString()}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                marginBottom: 10,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Image
+                source={{ uri: item.photo }}
+                style={{ width: 340, height: 240 }}
+              />
+            </View>
+          )}
+        />
       </View>
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+  },
+});

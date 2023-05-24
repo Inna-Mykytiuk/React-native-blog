@@ -1,18 +1,27 @@
 const data = [
   {
     id: "1",
-    name: "Forest",
-    location: "Ivano-Frankivs'k Region, Ukraine",
+    image: require("../../../assets/image/forest.jpg"),
+    nameLocation: "Forest",
+    location: "Ukraine",
+    commentsCount: 8,
+    likesCount: 153,
   },
   {
     id: "2",
-    name: "Black Sea Sunset",
+    image: require("../../../assets/image/sunset.jpg"),
+    nameLocation: "Sunset on Black Sea",
     location: "Ukraine",
+    commentsCount: 10,
+    likesCount: 200,
   },
   {
     id: "3",
-    name: "Venecia old house",
+    image: require("../../../assets/image/old_house.jpg"),
+    nameLocation: "Old house in Venice",
     location: "Italy",
+    commentsCount: 50,
+    likesCount: 200,
   },
 ];
 

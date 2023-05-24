@@ -22,7 +22,7 @@ export const Navigation = () => {
         initialRouteName='Login'
         options={{ headerShown: false }}
       >
-        <MainStack.Screen
+        {/* <MainStack.Screen
           name='Login'
           component={LoginScreen}
           options={{ headerShown: false }}
@@ -31,7 +31,7 @@ export const Navigation = () => {
           name='Registration'
           component={RegistrationScreen}
           options={{ headerShown: false }}
-        />
+        /> */}
 
         <MainStack.Screen
           name='Home'
@@ -39,7 +39,7 @@ export const Navigation = () => {
           options={{ headerShown: false }}
         />
 
-        <MainStack.Screen
+        {/* <MainStack.Screen
           name='Comments'
           component={CommentsScreen}
           options={{
@@ -48,7 +48,7 @@ export const Navigation = () => {
 
             headerTitleStyle: { paddingBottom: 5 },
           }}
-        />
+        /> */}
       </MainStack.Navigator>
     </NavigationContainer>
   );
