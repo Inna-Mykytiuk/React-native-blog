@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text,
   TextInput,
@@ -29,17 +29,39 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [isFocus, setIsFocus] = useState(initialStateFocus);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [posts, setPosts] = useState(initialStatePosts);
-
   const [photoPost, setPhotoPost] = useState(null);
-
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
+  const [permission, setPermission] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Camera.requestCameraPermissionsAsync();
+      setPermission(status === "granted");
+    })();
+  }, []);
+
+  // const takePhoto = async () => {
+  //   const photo = await camera.takePictureAsync();
+  //   setPhoto(photo.uri);
+  //   console.log("photo", photo);
+  // };
 
   const takePhoto = async () => {
-    const photo = await camera.takePictureAsync();
-    setPhoto(photo.uri);
-    console.log("photo", photo);
+    if (camera) {
+      const photo = await camera.takePictureAsync();
+      setPhoto(photo.uri);
+      console.log("photo", photo);
+    }
   };
+
+  if (permission === null) {
+    return <View />;
+  }
+
+  if (!permission) {
+    return <Text>No access to camera</Text>;
+  }
 
   const handlerAddPhotoPost = () => {
     setPhotoPost("../../../assets/image/forest.jpg");

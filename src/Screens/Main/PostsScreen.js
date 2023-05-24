@@ -1,7 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, Image, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import { Container } from "../../../Components/Container";
 import { fonts } from "../../../assets/fonts/fonts";
+
+import {
+  AddAvatarIcon,
+  CommentOnIcon,
+  LikeOnIcon,
+  LogOutIcon,
+  MapPinIcon,
+  RemoveAvatarIcon,
+} from "../../../Components/Icons";
 
 export const PostsScreen = ({ route }) => {
   const [posts, setPosts] = useState([]);
@@ -50,8 +66,43 @@ export const PostsScreen = ({ route }) => {
             >
               <Image
                 source={{ uri: item.photo }}
-                style={{ width: 340, height: 240 }}
+                style={{ width: "100%", height: 240, borderRadius: 8 }}
               />
+              <Text>{item.name}</Text>
+              <Text>{item.location}</Text>
+              {/* <View>
+                <Text style={{ fontSize: 16, color: "#000" }}>
+                  {item.nameLocation}
+                </Text>
+                <View
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    marginBottom: 32,
+                  }}
+                >
+                  <View
+                    style={{
+                      flex: 2,
+                      flexDirection: "row",
+                    }}
+                  >
+                    <TouchableOpacity
+                      style={{ flexDirection: "row", marginRight: 24 }}
+                      onPress={() => navigation.navigate("Comments")}
+                    >
+                      <CommentOnIcon />
+                      <Text style={{ marginLeft: 6 }}>
+                        {item.commentsCount}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                  <TouchableOpacity style={{ flexDirection: "row" }}>
+                    <MapPinIcon />
+                    <Text style={{ marginLeft: 6 }}>{item.location}</Text>
+                  </TouchableOpacity>
+                </View>
+              </View> */}
             </View>
           )}
         />
