@@ -35,9 +35,9 @@ export const Home = ({ navigation }) => {
         component={PostsScreen}
         options={{
           tabBarIcon: ({ focused }) => <GridIcon focused={focused} />,
-          // headerLeftContainerStyle: { paddingLeft: 20 },
           headerTitleAlign: "center",
           headerTitleStyle: { paddingBottom: 5 },
+          headerShown: false,
           headerRight: () => (
             <TouchableOpacity
               style={styles.logoutButton}

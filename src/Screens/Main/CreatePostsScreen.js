@@ -13,6 +13,7 @@ import { CameraIcon, MapPinIcon, TrashIcon } from "../../../Components/Icons";
 import { MainButton, TrashButton } from "../../../Components/Buttons";
 import { fonts } from "../../../assets/fonts/fonts";
 import { Camera, CameraType } from "expo-camera";
+import * as Location from "expo-location";
 
 const initialStatePosts = {
   name: "",
@@ -29,39 +30,24 @@ export const CreatePostsScreen = ({ navigation }) => {
   const [isFocus, setIsFocus] = useState(initialStateFocus);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [posts, setPosts] = useState(initialStatePosts);
+
   const [photoPost, setPhotoPost] = useState(null);
+
   const [camera, setCamera] = useState(null);
   const [photo, setPhoto] = useState(null);
-  const [permission, setPermission] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      const { status } = await Camera.requestCameraPermissionsAsync();
-      setPermission(status === "granted");
-    })();
-  }, []);
-
-  // const takePhoto = async () => {
-  //   const photo = await camera.takePictureAsync();
-  //   setPhoto(photo.uri);
-  //   console.log("photo", photo);
-  // };
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
   const takePhoto = async () => {
-    if (camera) {
-      const photo = await camera.takePictureAsync();
-      setPhoto(photo.uri);
-      console.log("photo", photo);
-    }
+    const photo = await camera.takePictureAsync();
+    const location = await Location.getCurrentPositionAsync();
+    console.log("latitude", location.coords.latitude);
+    console.log("longitude", location.coords.longitude);
+
+    setPhoto(photo.uri);
+    console.log("photo", photo);
   };
-
-  if (permission === null) {
-    return <View />;
-  }
-
-  if (!permission) {
-    return <Text>No access to camera</Text>;
-  }
 
   const handlerAddPhotoPost = () => {
     setPhotoPost("../../../assets/image/forest.jpg");
@@ -92,15 +78,47 @@ export const CreatePostsScreen = ({ navigation }) => {
     navigation.navigate("Posts", { photo });
   };
 
-  // const sendPhoto = () => {
-  //   console.log("navigation", navigation);
-  //   navigation.navigate("Posts", { photo });
-  // };
-
   const handlerTrash = () => {
     setIsShowKeyboard(false);
     setPosts(initialStatePosts);
   };
+
+  const checkFieldsFilled = () => {
+    return posts.name !== "" && posts.location !== "";
+  };
+
+  // useEffect(() => {
+  //   (async () => {
+  //     let { status } = await Location.requestForegroundPermissionsAsync();
+  //     if (status !== "granted") {
+  //       setErrorMsg("Permission to access location was denied");
+  //       return;
+  //     }
+
+  //     let location = await Location.getCurrentPositionAsync({});
+  //     setLocation(location);
+  //   })();
+  // }, []);
+  useEffect(() => {
+    const startCamera = async () => {
+      const { status } = await Permissions.requestAsync(Permissions.CAMERA);
+      if (status === "granted") {
+        const camera = await Camera.getAvailableCameraTypesAsync();
+        setCamera(camera[0]);
+      } else {
+        setErrorMsg("Permission to access camera was denied");
+      }
+    };
+
+    startCamera();
+  }, []);
+
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
+  }
 
   return (
     <Container>
@@ -167,6 +185,7 @@ export const CreatePostsScreen = ({ navigation }) => {
           text={"Publish"}
           onPress={handlerSubmit}
           style={{ marginBottom: deviceHeight < 1000 ? 40 : 120 }}
+          isFieldsFilled={checkFieldsFilled()}
         />
         <TrashButton onPress={handlerTrash}>
           <TrashIcon />
@@ -183,20 +202,6 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
   },
-  // snap: {
-  //   color: "#fff",
-  // },
-  // snapContainer: {
-  //   marginTop: 200,
-  //   borderWidth: 1,
-
-  //   borderColor: "#ff0000",
-  //   width: 70,
-  //   height: 70,
-  //   borderRadius: 50,
-  //   justifyContent: "center",
-  //   alignItems: "center",
-  // },
   takePhotoContainer: {
     position: "absolute",
     top: 10,

@@ -1,119 +1,87 @@
-import React, { useState, useEffect } from "react";
-import {
-  View,
-  Text,
-  Image,
-  StyleSheet,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import { Container } from "../../../Components/Container";
-import { fonts } from "../../../assets/fonts/fonts";
+import React from "react";
+import { moduleName } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { DefaultScreenPosts } from "../nestedScreens/DefaultScreen";
+import { CommentsScreen } from "../Second/CommentsScreen";
+import { Map } from "../Second/MapScreen";
+import { Feather } from "@expo/vector-icons";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
-import {
-  AddAvatarIcon,
-  CommentOnIcon,
-  LikeOnIcon,
-  LogOutIcon,
-  MapPinIcon,
-  RemoveAvatarIcon,
-} from "../../../Components/Icons";
+const NestedScreen = createStackNavigator();
 
-export const PostsScreen = ({ route }) => {
-  const [posts, setPosts] = useState([]);
-  console.log("route.params", route.params);
-
-  const userData = route.params;
-
-  useEffect(() => {
-    if (route.params) {
-      setPosts((prevState) => [...prevState, route.params]);
-    }
-  }, [route.params]);
+export const PostsScreen = ({ navigation, route }) => {
+  if (route.state && route.state.index > 0) {
+    navigation.setOptions({ tabBarVisible: false });
+  } else ({ tabBarVisible: true });
 
   return (
-    <Container>
-      <View
-        style={{
-          paddingHorizontal: 16,
-          flexDirection: "row",
-          paddingTop: 32,
-          alignItems: "center",
-        }}
-      >
-        <Image
-          source={require("../../../assets/image/avatar.png")}
-          style={{ width: 60, height: 60 }}
-        />
-        <View style={{ marginLeft: 8 }}>
-          <Text style={{ fontFamily: fonts.roboto700 }}>
-            {userData?.user?.login || "Natali Romanova"}
-          </Text>
-          <Text>{userData?.user?.email || "email@example.com"}</Text>
-        </View>
-      </View>
-      <View style={styles.container}>
-        <FlatList
-          data={posts}
-          keyExtractor={(item, indx) => indx.toString()}
-          renderItem={({ item }) => (
-            <View
-              style={{
-                marginBottom: 10,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+    <NestedScreen.Navigator>
+      <NestedScreen.Screen
+        name='DefaultScreen'
+        component={DefaultScreenPosts}
+        // options={{ headerShown: false }}
+        options={{
+          tabBarIcon: ({ focused }) => <GridIcon focused={focused} />,
+          headerTitleAlign: "center",
+          headerTitleStyle: { paddingBottom: 5 },
+
+          headerRight: () => (
+            <TouchableOpacity
+              style={styles.logoutButton}
+              activeOpacity={0.5}
+              onPress={() => navigation.navigate("Login")}
             >
-              <Image
-                source={{ uri: item.photo }}
-                style={{ width: "100%", height: 240, borderRadius: 8 }}
-              />
-              <Text>{item.name}</Text>
-              <Text>{item.location}</Text>
-              {/* <View>
-                <Text style={{ fontSize: 16, color: "#000" }}>
-                  {item.nameLocation}
-                </Text>
-                <View
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    marginBottom: 32,
-                  }}
-                >
-                  <View
-                    style={{
-                      flex: 2,
-                      flexDirection: "row",
-                    }}
-                  >
-                    <TouchableOpacity
-                      style={{ flexDirection: "row", marginRight: 24 }}
-                      onPress={() => navigation.navigate("Comments")}
-                    >
-                      <CommentOnIcon />
-                      <Text style={{ marginLeft: 6 }}>
-                        {item.commentsCount}
-                      </Text>
-                    </TouchableOpacity>
-                  </View>
-                  <TouchableOpacity style={{ flexDirection: "row" }}>
-                    <MapPinIcon />
-                    <Text style={{ marginLeft: 6 }}>{item.location}</Text>
-                  </TouchableOpacity>
-                </View>
-              </View> */}
-            </View>
-          )}
-        />
-      </View>
-    </Container>
+              <Feather name='log-out' size={24} color='#BDBDBD' />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <NestedScreen.Screen
+        name='Comments'
+        component={CommentsScreen}
+        options={{
+          headerLeftContainerStyle: { paddingLeft: 10 },
+          headerTitleAlign: "center",
+
+          headerTitleStyle: { paddingBottom: 5 },
+          // headerLeft: () => (
+          //   <TouchableOpacity
+          //     style={styles.backButton}
+          //     onPress={() => navigation.navigate("Profile")}
+          //   >
+          //     <Feather name='arrow-left' size={24} color='#BDBDBD' />
+          //   </TouchableOpacity>
+          // ),
+        }}
+      />
+      <NestedScreen.Screen
+        name='Map'
+        component={Map}
+        options={{
+          headerLeftContainerStyle: { paddingLeft: 10 },
+          headerTitleAlign: "center",
+
+          headerTitleStyle: { paddingBottom: 5 },
+          // headerLeft: () => (
+          //   <TouchableOpacity
+          //     style={styles.backButton}
+          //     onPress={() => navigation.navigate("Profile")}
+          //   >
+          //     <Feather name='arrow-left' size={24} color='#BDBDBD' />
+          //   </TouchableOpacity>
+          // ),
+        }}
+      />
+    </NestedScreen.Navigator>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
+  logoutButton: {
+    paddingRight: 30,
+  },
+
+  backButton: {
+    marginLeft: 16,
   },
 });

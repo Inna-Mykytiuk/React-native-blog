@@ -1,13 +1,17 @@
 import { StyleSheet, TouchableOpacity, Text } from "react-native";
 import { fonts } from "../assets/fonts/fonts";
 
-export const MainButton = ({ text, onPress, style }) => {
+export const MainButton = ({ text, onPress, style, isFieldsFilled }) => {
+  const buttonColor = isFieldsFilled ? "#FF6C00" : "#F6F6F6";
+  const textColor = isFieldsFilled ? "#FFFFFF" : "#BDBDBD";
+  const marginBottom = isFieldsFilled ? 120 : 16;
+
   return (
     <TouchableOpacity
       style={{
         ...styles.authBtn,
-        backgroundColor: text === "Publish" ? "#F6F6F6" : "#FF6C00",
-        marginBottom: text === "Publish" ? 120 : 16,
+        backgroundColor: buttonColor,
+        marginBottom: marginBottom,
         ...style,
       }}
       onPress={onPress}
@@ -16,7 +20,7 @@ export const MainButton = ({ text, onPress, style }) => {
       <Text
         style={{
           ...styles.textButton,
-          color: text === "Publish" ? "#BDBDBD" : "#FFFFFF",
+          color: textColor,
         }}
       >
         {text}

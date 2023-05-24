@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FlatList,
   Image,
@@ -42,6 +42,21 @@ export const CommentsScreen = ({ navigation }) => {
   const [comments, setComments] = useState(initStateComments);
   const { wrapper, dateStyle, textStyle, avatar, input, wrapperInput } = styles;
 
+  useEffect(() => {
+    navigation.getParent().setOptions({ tabBarStyle: { display: "none" } });
+    return () => {
+      navigation.getParent().setOptions({
+        tabBarStyle: {
+          display: "flex",
+          height: 83,
+          paddingTop: 9,
+          boxShadow: "0px -0.5px 0px rgba(0, 0, 0, 0.3)",
+          paddingLeft: 45,
+        },
+      });
+    };
+  });
+
   const handlerFocus = (input) => {
     setIsShowKeyboard(true);
     setIsFocus((prevState) => ({
@@ -76,6 +91,8 @@ export const CommentsScreen = ({ navigation }) => {
         style={{
           paddingHorizontal: 16,
           paddingTop: 32,
+          paddingBottom: 100,
+          marginBottom: 150,
         }}
       >
         <Image
