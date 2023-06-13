@@ -3,9 +3,37 @@
     "name": "React-native-blog",
     "slug": "React-native-blog",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "plugins": [
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow APP to access your photos.",
+          "savePhotosPermission": "Allow APP to save photos.",
+          "isAccessMediaLocationEnabled": true
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow the APP to access your camera."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow APP to use your location."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos to let you share them with your friends."
+        }
+      ]
+    ],
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -13,20 +41,19 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Allow the APP to access your camera.",
+        "NSLocationWhenInUseUsageDescription": "Allow the APP to use your location."
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.tokio1987.Reactnativeblog",
-      "softwareKeyboardLayoutMode": "pan",
-      "config": {
-        "googleMaps": {
-          "apiKey": "AIzaSyBrdDJg5ODd--w7cYUnHX1TWS5k3nRKRCY"
-        }
-      }
+      "package": "com.irinavn.TheArtofTravell",
+      "permissions": ["CAMERA", "ACCESS_COARSE_LOCATION", "ACCESS_FINE_LOCATION"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -35,9 +62,6 @@
       "eas": {
         "projectId": "d159a321-c944-4ad9-ada1-0b094e971005"
       }
-    },
-    "runtimeVersion": {
-      "policy": "sdkVersion"
     },
     "updates": {
       "url": "https://u.expo.dev/d159a321-c944-4ad9-ada1-0b094e971005"
