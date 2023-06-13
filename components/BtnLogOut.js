@@ -12,7 +12,6 @@ const BtnLogOut = ({ navigation }) => {
 export default BtnLogOut;
 
 const styles = StyleSheet.create({
-  // logOut
   logoutBtn: {
     position: 'absolute',
     top: 22,

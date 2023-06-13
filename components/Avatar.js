@@ -33,7 +33,6 @@ export const Avatar = () => {
       setAvatar(result.assets[0].uri);
 
       const avatarURL = await uploadPhotoToServer(result.assets[0].uri);
-      // console.log('AVATAR', avatarURL);
       dispatch(changeAvatarUser(avatarURL));
     }
   };
